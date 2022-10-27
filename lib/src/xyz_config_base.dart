@@ -8,7 +8,18 @@ class XyzConfig {
   final _config = <dynamic, dynamic>{};
   Map<dynamic, dynamic> get config => _config;
 
-  Future<Map<dynamic, dynamic>> configFromYaml(
+  XyzConfig._();
+
+  static Future<XyzConfig> configFromYaml(
+    Future<String> Function() loader, {
+    Uri? sourceUrl,
+  }) async {
+    final instance = XyzConfig._();
+    await instance._configFromYaml(loader, sourceUrl: sourceUrl);
+    return instance;
+  }
+
+  Future<void> _configFromYaml(
     Future<String> Function() loader, {
     Uri? sourceUrl,
   }) async {
@@ -18,17 +29,18 @@ class XyzConfig {
       _parseYaml(yaml);
       _replace(_config);
     }
-    return _config;
   }
 
-  Future<Map<dynamic, dynamic>> configFromJsonc(
-    Future<String> Function() loader, {
-    Uri? sourceUrl,
-  }) async {
+  static Future<XyzConfig> configFromJsonc(Future<String> Function() loader) async {
+    final instance = XyzConfig._();
+    await instance._configFromJsonc(loader);
+    return instance;
+  }
+
+  Future<void> _configFromJsonc(Future<String> Function() loader) async {
     final src = await loader();
     _parseJson(src);
     _replace(_config);
-    return _config;
   }
 
   void _parseYaml(YamlMap input) {
@@ -106,22 +118,34 @@ class XyzConfig {
     global.removeWhere((_, final v) => v is Map || v is List);
     $replace(null, global /*Map.of(global)*/);
   }
-
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
-  dynamic _handle(String input, Map<dynamic, dynamic> handles) {
-    var copy = input;
-    for (final entry in handles.entries) {
-      final k = entry.key;
-      final v = entry.value;
-      final source = "{$k}";
-      if (input == source) return v;
-      final expression = RegExp(source, caseSensitive: false);
-      copy = copy.replaceAll(expression, v.toString());
-    }
-    return copy;
-  }
 }
+
+dynamic _handle(String input, Map<dynamic, dynamic> handles) {
+  var copy = input;
+  for (final entry in handles.entries) {
+    final k = entry.key;
+    final v = entry.value;
+    final source = "{$k}";
+    if (input == source) return v;
+    final expression = RegExp(source, caseSensitive: false);
+    copy = copy.replaceAll(expression, v.toString());
+  }
+  return copy;
+}
+
+String _translate(
+  String src,
+  String locale,
+  Map<String, XyzConfig> configs,
+) {
+  final handles = configs[locale]?.config;
+  if (handles?.isNotEmpty == true) {
+    return _handle(src, handles!).toString();
+  }
+  return "???";
+}
+
+
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
