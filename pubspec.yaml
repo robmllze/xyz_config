@@ -1,10 +1,11 @@
 name: xyz_config
-version: 0.0.1
+version: 0.0.3
 
 environment:
-  sdk: '>=2.18.2 <3.0.0'
+  sdk: '>=2.18.3 <3.0.0'
 
 dependencies:
+  universal_html: ^2.0.8
   yaml: ^3.1.0
 
 dev_dependencies:

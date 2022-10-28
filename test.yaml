@@ -1,0 +1,17 @@
+# This is a comment
+this_file_type: "YAML"
+a: [
+  1,
+  2,
+  {
+    b: Cool cat!,
+    c: (=.b) (=b)
+  }
+]
+b: hello
+c: (=.b)
+d:
+  e: 1
+  b: world
+  f: (=b) (=d.b) (=.b)
+

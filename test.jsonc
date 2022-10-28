@@ -1,18 +1,19 @@
 {
   // This is a comment
-  "intro": "I am a jsonc file",
+  "this_file_type": "JSONC",
   "a": [
     1,
     2,
     {
-      "b": "{b}"
+      "b": "Cool cat!",
+      "c": "(=.b) (=b)"
     }
   ],
   "b": "hello",
-  "c": "{.b}",
+  "c": "(=.b)",
   "d": {
     "e": 1,
     "b": "world",
-    "f": "{b} {d.b} {.b}"
+    "f": "(=b) (=d.b) (=.b)"
   }
 }
