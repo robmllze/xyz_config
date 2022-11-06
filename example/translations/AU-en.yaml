@@ -1,0 +1,34 @@
+# This is an example of a JSONC configuration file.
+config_file: 
+  language: English,
+  country: Australia,
+  version: 1,
+  type: YAML
+app: 
+  name: Xyz Config Example,
+  url: https://config-example.xyz,
+  version: 0.1.0,
+  builds:
+    - name: release
+    - name: profile
+    - name: debug
+  args:
+    - --debug
+    - true
+    - --api_key
+    - 90887068514936271
+screens:
+  home:
+    name: screen_home,
+    title: Home,
+    path: /(=.name),
+    content: The app's name is (=app.name) and this screen's name is (=.name)
+  settings: 
+    name: screen_settings,
+    title: Settings,
+    path: /(=.nAmE) # handles are not case-sensitive
+  about: 
+    name: screen_about,
+    title: About,
+    path: /(=.NAME), # handles are not case-sensitive
+    content: This package was developed by (=developer). Enjoy!

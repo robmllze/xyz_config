@@ -1,19 +1,13 @@
 # ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 #
-# XYZ Config
+# XYZ Config Example
 #
 # ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
-name: xyz_config
-version: 0.1.0
-publish_to: none
+name: xyz_config_example
 environment:
-  sdk: '>=2.18.2 <3.0.0'
+  sdk: '>=2.18.2 <3.0.0' 
 dependencies:
-  xyz_utils:
-    git:
-      url: https://github.com/robmllze/xyz_utils.git
-      ref: master
-  yaml: ^3.1.0
-dev_dependencies:
-  lints: ^2.0.0
+  xyz_config:
+    path: ../
+  http: ^0.13.5

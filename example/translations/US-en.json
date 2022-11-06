@@ -1,0 +1,47 @@
+{
+  "config_file.language": "English",
+  "config_file.country": "United States of America",
+  "config_file.version": 1,
+  "config_file.type": "JSON",
+  "app": {
+    "name": "Xyz Config Example",
+    "url": "https://config-example.xyz",
+    "version": "0.1.0",
+    "builds": [
+      {
+        "name": "release"
+      },
+      {
+        "name": "profile"
+      },
+      {
+        "name": "debug"
+      }
+    ],
+    "args": [
+      "--debug",
+      true,
+      "--api_key",
+      90887068514936271
+    ]
+  },
+  "screens": {
+    "home": {
+      "name": "screen_home",
+      "title": "Home",
+      "path": "/(=.name)",
+      "content": "The app's name is (=app.name) and this screen's name is (=.name)"
+    },
+    "settings": {
+      "name": "screen_settings",
+      "title": "Settings",
+      "path": "/(=.nAmE)"
+    },
+    "about": {
+      "name": "screen_about",
+      "title": "About",
+      "path": "/(=.NAME)",
+      "content": "This package was developed by (=developer). Enjoy!"
+    }
+  }
+}
