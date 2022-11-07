@@ -31,5 +31,5 @@ class XyzLocaleRef extends XyzConfigRef {
   XyzLocaleRef(
     this.countryCode,
     this.languageCode,
-  ) : super("$countryCode-$languageCode".toLowerCase());
+  ) : super("${countryCode}_$languageCode".toLowerCase());
 }
