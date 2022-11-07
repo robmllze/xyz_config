@@ -33,15 +33,14 @@
       90887068514936271
     ]
   },
+  "name": "screen_unknown",
   "screens": {
     "home": {
-      "name": "screen_home",
       "title": "Home",
       "path": "/(=.name)",
       "content": "The app's name is (=app.name) and this screen's name is (=.name)"
     },
     "settings": {
-      "name": "screen_settings",
       "title": "Settings",
       "path": "/(=.nAmE)" // handles are not case-sensitive
     },

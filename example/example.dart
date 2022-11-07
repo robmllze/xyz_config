@@ -55,7 +55,7 @@ void main() async {
   final managerRemote = XyzConfigManager.create(
     {
       XyzLocaleRef("AU", "en"): const XyzConfigFileRef(
-        "https://firebasestorage.googleapis.com/v0/b/xyz-engine.appspot.com/o/AU-en.yaml?alt=media&token=588833f2-d0a7-4f7d-84c1-10578a73ca23",
+        "https://firebasestorage.googleapis.com/v0/b/xyz-engine.appspot.com/o/AU-en.yaml?alt=media&token=eee6fd63-e6b7-4e14-80f2-c63b059d3bd5",
         alias: "English (AU)",
       ),
     },
