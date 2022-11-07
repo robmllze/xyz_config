@@ -24,7 +24,9 @@ class XyzConfig {
   //
 
   final Map<dynamic, dynamic> _fields = {};
-  Map<dynamic, dynamic> get fields => _fields;
+  Map<dynamic, dynamic> _fieldsWithLowerCaseKeys = {};
+  Map<dynamic, dynamic> get fields => this._fields;
+  Map<dynamic, dynamic> get fieldsWithLowerCaseKeys => this._fieldsWithLowerCaseKeys;
   final XyzConfigRef configRef;
   final String _sOpen, _sClose;
   Future<String> Function() loader;
@@ -34,6 +36,10 @@ class XyzConfig {
   //
 
   XyzConfig._(this.configRef, this.loader, this._sOpen, this._sClose);
+
+  //
+  //
+  //
 
   //
   //
@@ -58,6 +64,7 @@ class XyzConfig {
     if (yaml is YamlMap) {
       this._parseYaml(yaml);
       this._replace(this._fields);
+      this._fieldsWithLowerCaseKeys = _withLowerCaseKeys(this._fields);
     }
   }
 
@@ -73,6 +80,7 @@ class XyzConfig {
     final src = await this.loader();
     this._parseJsonc(src);
     this._replace(this._fields);
+    this._fieldsWithLowerCaseKeys = _withLowerCaseKeys(this._fields);
   }
 
   void _parseJsonc(String input) {
@@ -97,6 +105,7 @@ class XyzConfig {
     final src = await this.loader();
     this._parseJson(src);
     this._replace(this._fields);
+    this._fieldsWithLowerCaseKeys = _withLowerCaseKeys(this._fields);
   }
 
   void _parseJson(String input) {
@@ -141,7 +150,7 @@ class XyzConfig {
       return r;
     }
 
-    $parse(input) as Map<dynamic, dynamic>;
+    $parse(input);
   }
 
   //
@@ -178,4 +187,10 @@ class XyzConfig {
     global.removeWhere((_, final v) => v is Map || v is List);
     $replace(null, global /*Map.of(global)*/);
   }
+}
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+Map<dynamic, dynamic> _withLowerCaseKeys(Map<dynamic, dynamic> fields) {
+  return fields.map((final k, final v) => MapEntry(k is String ? k.toLowerCase() : k, v));
 }

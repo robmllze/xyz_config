@@ -12,7 +12,7 @@ extension XyzConfigTranslate on String {
   T? tr<T>([Map<dynamic, dynamic> args = const {}]) {
     try {
       final manager = XyzConfigManager._translationManager!;
-      final fields = manager._selected!.config._fields;
+      final fields = manager._selected!.config._fieldsWithLowerCaseKeys;
       final h = _handle(
         fields[this].toString(),
         {...fields, ...args},

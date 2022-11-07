@@ -114,9 +114,11 @@ class XyzConfigManager {
 
   XyzConfigFile? getByConfigRef(dynamic configRef) {
     return this.files.cast<XyzConfigFile?>().firstWhere(
-          (final l) => l!.config.configRef == _convertConfigRef(configRef),
-          orElse: () => null,
-        );
+      (final l) {
+        return l!.config.configRef == _convertConfigRef(configRef);
+      },
+      orElse: () => null,
+    );
   }
 
   XyzConfigFile? selectByConfigRef(dynamic configRef) {
@@ -131,6 +133,7 @@ class XyzConfigManager {
 
   Future<XyzConfigFile?> loadFileByConfigRef(dynamic configRef) async {
     final g = this.getByConfigRef(configRef);
+    print(g);
     if (await g?.process() == true) {
       return g;
     }
