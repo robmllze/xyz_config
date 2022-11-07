@@ -133,7 +133,6 @@ class XyzConfigManager {
 
   Future<XyzConfigFile?> loadFileByConfigRef(dynamic configRef) async {
     final g = this.getByConfigRef(configRef);
-    print(g);
     if (await g?.process() == true) {
       return g;
     }
