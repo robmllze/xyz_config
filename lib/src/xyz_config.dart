@@ -24,9 +24,7 @@ class XyzConfig {
   //
 
   final Map<dynamic, dynamic> _fields = {};
-  Map<dynamic, dynamic> _fieldsWithLowerCaseKeys = {};
   Map<dynamic, dynamic> get fields => this._fields;
-  Map<dynamic, dynamic> get fieldsWithLowerCaseKeys => this._fieldsWithLowerCaseKeys;
   final XyzConfigRef configRef;
   final String _sOpen, _sClose;
   Future<String> Function() loader;
@@ -64,7 +62,6 @@ class XyzConfig {
     if (yaml is YamlMap) {
       this._parseYaml(yaml);
       this._replace(this._fields);
-      this._fieldsWithLowerCaseKeys = _withLowerCaseKeys(this._fields);
     }
   }
 
@@ -80,7 +77,6 @@ class XyzConfig {
     final src = await this.loader();
     this._parseJsonc(src);
     this._replace(this._fields);
-    this._fieldsWithLowerCaseKeys = _withLowerCaseKeys(this._fields);
   }
 
   void _parseJsonc(String input) {
@@ -105,7 +101,6 @@ class XyzConfig {
     final src = await this.loader();
     this._parseJson(src);
     this._replace(this._fields);
-    this._fieldsWithLowerCaseKeys = _withLowerCaseKeys(this._fields);
   }
 
   void _parseJson(String input) {
