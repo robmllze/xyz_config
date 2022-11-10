@@ -25,11 +25,11 @@ class XyzConfigRef<T> {
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 class XyzLocaleRef extends XyzConfigRef {
-  final String countryCode;
   final String languageCode;
+  final String countryCode;
   String get localeCode => super.refCode;
   XyzLocaleRef(
-    this.countryCode,
     this.languageCode,
-  ) : super("${countryCode}_$languageCode".toLowerCase());
+    this.countryCode,
+  ) : super("${languageCode}_$countryCode".toLowerCase());
 }
