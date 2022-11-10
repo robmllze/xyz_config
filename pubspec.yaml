@@ -14,7 +14,7 @@ dependencies:
   xyz_utils:
     git:
       url: https://github.com/robmllze/xyz_utils.git
-      ref: 7c2fb565b766972c96289437d186f5a0868fc6d
+      ref: 7c2fb56
   yaml: ^3.1.0
 dev_dependencies:
   lints: ^2.0.0
