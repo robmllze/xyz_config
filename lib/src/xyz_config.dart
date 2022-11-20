@@ -186,6 +186,6 @@ class XyzConfig {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-Map<dynamic, dynamic> _withLowerCaseKeys(Map<dynamic, dynamic> fields) {
-  return fields.map((final k, final v) => MapEntry(k is String ? k.toLowerCase() : k, v));
-}
+// Map<dynamic, dynamic> _withLowerCaseKeys(Map<dynamic, dynamic> fields) {
+//   return fields.map((final k, final v) => MapEntry(k is String ? k.toLowerCase() : k, v));
+// }
