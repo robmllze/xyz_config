@@ -6,7 +6,7 @@
 
 name: xyz_config
 description: Configure your app from .json, .jsonc and .yaml files
-version: 0.1.7
+version: 0.1.8
 publish_to: none
 environment:
   sdk: '>=2.18.2 <3.0.0'
