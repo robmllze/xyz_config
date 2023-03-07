@@ -6,10 +6,10 @@
 
 name: xyz_config
 description: Configure your app from .json, .jsonc and .yaml files
-version: 0.1.8
+version: 0.2.0
 publish_to: none
 environment:
-  sdk: '>=2.18.2 <3.0.0'
+  sdk: '>=3.0.0-218.1.beta < 4.0.0'
 dependencies:
   xyz_utils:
     git:
