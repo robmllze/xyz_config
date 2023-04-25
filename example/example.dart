@@ -100,7 +100,7 @@ void main() async {
     final preview = fields?.entries.map((final l) => "${l.key}: ${l.value}").join("\n");
     print("Preview:\n\n$preview");
     final apiKey0 = fields?["app.args.3"];
-    final apiKey1 = "app.args.3".tr<int>();
+    final apiKey1 = "app.args.3".tr();
     print("\napi_key_0: $apiKey0");
     print("api_key_1: $apiKey1");
 
