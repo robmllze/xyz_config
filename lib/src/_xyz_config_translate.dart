@@ -40,11 +40,15 @@ extension XyzConfigTranslate on String {
   String tr([Map<dynamic, dynamic> args = const {}]) {
     final segments = this.split("||");
     final length = segments.length;
+    String fallback, path;
     if (length == 1) {
-      return this.trim().translate<String>(args, this) ?? this;
+      fallback = this;
+      path = this.trim();
+    } else {
+      fallback = segments[0];
+      path = segments[1].trim();
     }
-    final fallback = segments[0];
-    final path = segments[1].trim();
-    return path.translate<String>(args, fallback) ?? fallback;
+    final translated = path.translate<String>(args, fallback) ?? fallback;
+    return translated;
   }
 }
