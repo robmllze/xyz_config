@@ -17,13 +17,22 @@ extension XyzConfigTranslate on String {
     try {
       final manager = XyzConfigManager._translationManager!;
       final fields = manager._selected!.config._fields;
-      final match = fields.entries.firstWhere((final e) {
-        final a = e.key?.toString().toLowerCase();
-        final b = this.replaceAll("/", ".").toLowerCase();
-        return a == b;
-      });
+      final match = () {
+        try {
+          return fields.entries
+              .firstWhere((final e) {
+                final a = e.key?.toString().toLowerCase();
+                final b = this.replaceAll("/", ".").toLowerCase();
+                return a == b;
+              })
+              .value
+              .toString();
+        } catch (_) {
+          return fallback.toString();
+        }
+      }();
       final handled = _handle(
-        match.value.toString(),
+        match,
         {...fields, ...args},
         manager._sOpen,
         manager._sClose,
