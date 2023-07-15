@@ -25,3 +25,15 @@ dynamic _handle(
   }
   return copy;
 }
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+extension ReplaceHandles on String {
+  String replaceHandles(
+    Map<String, dynamic> handles, [
+    String sOpen = r"\(\=",
+    String sClose = r"\)",
+  ]) {
+    return _handle(this, handles, sOpen, sClose).toString();
+  }
+}
