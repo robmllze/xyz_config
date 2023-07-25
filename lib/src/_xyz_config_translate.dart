@@ -47,7 +47,7 @@ extension XyzConfigTranslate on String {
   //
 
   String tr([Map<dynamic, dynamic> args = const {}]) {
-    return _tr(this, "(=", ")", "||", args);
+    return trx(this, "(=", ")", "||", args);
   }
 }
 
@@ -167,7 +167,7 @@ String _translatePart(
 //
 //
 
-String _tr(
+String trx(
   String input,
   String opening,
   String closing,
