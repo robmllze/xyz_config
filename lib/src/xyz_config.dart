@@ -26,14 +26,14 @@ class XyzConfig {
   final Map<dynamic, dynamic> _fields = {};
   Map<dynamic, dynamic> get fields => this._fields;
   final XyzConfigRef configRef;
-  final String _sOpen, _sClose;
+  final String __opening, _closing;
   Future<String> Function() loader;
 
   //
   //
   //
 
-  XyzConfig._(this.configRef, this.loader, this._sOpen, this._sClose);
+  XyzConfig._(this.configRef, this.loader, this.__opening, this._closing);
 
   //
   //
@@ -46,10 +46,10 @@ class XyzConfig {
   factory XyzConfig(
     XyzConfigRef configRef,
     Future<String> Function() loader, {
-    String sOpen = r"\(\=",
-    String sClose = r"\)",
+    String opening = r"\(\=",
+    String closing = r"\)",
   }) {
-    return XyzConfig._(configRef, loader, sOpen, sClose);
+    return XyzConfig._(configRef, loader, opening, closing);
   }
 
   //
@@ -138,7 +138,7 @@ class XyzConfig {
           r[k] = py;
         }
       } else if (input is String) {
-        r = _handle(input, local, _sOpen, _sClose);
+        r = _handle(input, local, __opening, _closing);
       } else {
         r = input;
       }
@@ -169,7 +169,7 @@ class XyzConfig {
         }
       }
       if (value is String) {
-        r = _handle(value, global, _sOpen, _sClose);
+        r = _handle(value, global, __opening, _closing);
       } else {
         r = value;
       }

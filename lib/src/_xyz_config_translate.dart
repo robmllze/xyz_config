@@ -34,8 +34,8 @@ extension XyzConfigTranslate on String {
       final handled = _handle(
         match,
         {...fields, ...args},
-        manager._sOpen,
-        manager._sClose,
+        manager._opening,
+        manager._closing,
       );
       return let<T>(handled) ?? fallback;
     } catch (_) {}

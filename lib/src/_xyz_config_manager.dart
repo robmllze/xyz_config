@@ -26,7 +26,7 @@ class XyzConfigManager {
   XyzConfigFile? _selected;
   XyzConfigFile? get selectedFile => this._selected;
   final Set<XyzConfigFile> files;
-  final String _sOpen, _sClose;
+  final String _opening, _closing;
 
   //
   //
@@ -34,8 +34,8 @@ class XyzConfigManager {
 
   XyzConfigManager._(
     this.files,
-    this._sOpen,
-    this._sClose,
+    this._opening,
+    this._closing,
   ) {
     assert(files.isNotEmpty);
     this._selected = files.first;
@@ -59,8 +59,8 @@ class XyzConfigManager {
   factory XyzConfigManager.create(
     Map<dynamic, XyzConfigFileRef> files,
     Future<String> Function(String path) reader, {
-    String sOpen = r"\(\=",
-    String sClose = r"\)",
+    String opening = r"\(\=",
+    String closing = r"\)",
   }) {
     final configs = <XyzConfigFile>{};
     for (final entry in files.entries) {
@@ -71,12 +71,12 @@ class XyzConfigManager {
       config = XyzConfig(
         _convertConfigRef(configRef),
         () => reader(path),
-        sOpen: sOpen,
-        sClose: sClose,
+        opening: opening,
+        closing: closing,
       );
       configs.add(XyzConfigFile(fileRef, config));
     }
-    return XyzConfigManager._(configs, sOpen, sClose);
+    return XyzConfigManager._(configs, opening, closing);
   }
 
   //
