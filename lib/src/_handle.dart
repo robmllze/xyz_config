@@ -11,14 +11,14 @@ part of 'xyz_config.dart';
 dynamic _handle(
   String input,
   Map<dynamic, dynamic> handles,
-  String sOpen,
-  String sClose,
+  String opening,
+  String closing,
 ) {
   var copy = input;
   for (final entry in handles.entries) {
     final k = entry.key;
     final v = entry.value;
-    final source = "$sOpen$k$sClose";
+    final source = "$opening$k$closing";
     if (input == source) return v;
     final expression = RegExp(source, caseSensitive: false);
     copy = copy.replaceAll(expression, v.toString());
@@ -31,9 +31,9 @@ dynamic _handle(
 extension ReplaceHandles on String {
   String replaceHandles(
     Map<String, dynamic> handles, [
-    String sOpen = r"\(\=",
-    String sClose = r"\)",
+    String opening = r"\(\=",
+    String closing = r"\)",
   ]) {
-    return _handle(this, handles, sOpen, sClose).toString();
+    return _handle(this, handles, opening, closing).toString();
   }
 }
