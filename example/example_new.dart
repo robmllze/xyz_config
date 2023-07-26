@@ -26,5 +26,5 @@ void main() async {
 
   await managerLocal.loadFileByPath("test.yaml");
 
-  print("Hello how are you (=name)?".tr({"name": "Bob"}));
+  print("Hello how are you (=name)?".tr({"name": "Bob1"}));
 }
