@@ -26,7 +26,5 @@ void main() async {
 
   await managerLocal.loadFileByPath("test.yaml");
 
-  // print("(=user.name)".replaceHandles({"user.name": "WORKING!!!"}));
-  // print($handle("(=user.name))", {"user.name": "WORKING!!!"}, "(=", ")"));
-  // print("Joseph||user.middle-names.0".tr());
+  print("Hello how are you (=name)?".tr({"name": "Bob"}));
 }

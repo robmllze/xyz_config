@@ -1,5 +1,6 @@
 message: "Testing 123..."
-who: "myself"
+number: 4
+funny: "I do not like number (=.number)"
 user:
   name: Donald
   age: 42
