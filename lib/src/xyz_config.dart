@@ -26,14 +26,20 @@ class XyzConfig {
   final Map<dynamic, dynamic> _fields = {};
   Map<dynamic, dynamic> get fields => this._fields;
   final XyzConfigRef configRef;
-  final String _opening, _closing;
+  final String _opening, _closing, _delimiter;
   Future<String> Function() loader;
 
   //
   //
   //
 
-  XyzConfig._(this.configRef, this.loader, this._opening, this._closing);
+  XyzConfig._(
+    this.configRef,
+    this.loader,
+    this._opening,
+    this._closing,
+    this._delimiter,
+  );
 
   //
   //
@@ -46,10 +52,17 @@ class XyzConfig {
   factory XyzConfig(
     XyzConfigRef configRef,
     Future<String> Function() loader, {
-    String opening = r"\(\=",
-    String closing = r"\)",
+    String opening = "(=",
+    String closing = ")",
+    String delimiter = "||",
   }) {
-    return XyzConfig._(configRef, loader, opening, closing);
+    return XyzConfig._(
+      configRef,
+      loader,
+      opening,
+      closing,
+      delimiter,
+    );
   }
 
   //
@@ -112,7 +125,6 @@ class XyzConfig {
   //
   //
 
-  // TODO: Use translations via tr() to replace the values within the document.
   void _parse<TList, TMap>(TMap input, Map<dynamic, dynamic> global) {
     final local = <dynamic, dynamic>{};
     dynamic $parse(dynamic input, [String? kx]) {
@@ -139,7 +151,13 @@ class XyzConfig {
           r[k] = py;
         }
       } else if (input is String) {
-        r = trx(input, _opening, _closing, "||", local);
+        r = custromTr(
+          input,
+          opening: this._opening,
+          closing: this._closing,
+          delimiter: this._delimiter,
+          args: local,
+        );
       } else {
         r = input;
       }
@@ -170,7 +188,13 @@ class XyzConfig {
         }
       }
       if (value is String) {
-        r = trx(value, _opening, _closing, "||", global);
+        r = custromTr(
+          value,
+          opening: this._opening,
+          closing: this._closing,
+          delimiter: this._delimiter,
+          args: global,
+        );
       } else {
         r = value;
       }
