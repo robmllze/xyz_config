@@ -73,8 +73,8 @@ String custromTr(
   String opening = "(=",
   String closing = ")",
   String delimiter = "||",
-  List<String> excapeChars = const ["\\", "/"],
   Map<dynamic, dynamic> args = const {},
+  List<String> excapeChars = const ["\\", "/"],
 }) {
   // Shorten the function.
   String translatePart(String input) {

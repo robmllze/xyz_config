@@ -26,7 +26,7 @@ class XyzConfig {
   final Map<dynamic, dynamic> _fields = {};
   Map<dynamic, dynamic> get fields => this._fields;
   final XyzConfigRef configRef;
-  final String _opening, _closing, _delimiter;
+  final String opening, closing, delimiter;
   Future<String> Function() loader;
 
   //
@@ -36,9 +36,9 @@ class XyzConfig {
   XyzConfig._(
     this.configRef,
     this.loader,
-    this._opening,
-    this._closing,
-    this._delimiter,
+    this.opening,
+    this.closing,
+    this.delimiter,
   );
 
   //
@@ -151,13 +151,14 @@ class XyzConfig {
           r[k] = py;
         }
       } else if (input is String) {
-        r = custromTr(
-          input,
-          opening: this._opening,
-          closing: this._closing,
-          delimiter: this._delimiter,
-          args: local,
-        );
+        r = _handle(input, local, this.opening, this.closing);
+        // r = custromTr(
+        //   input,
+        //   opening: this._opening,
+        //   closing: this._closing,
+        //   delimiter: this._delimiter,
+        //   args: local,
+        // );
       } else {
         r = input;
       }
@@ -188,13 +189,14 @@ class XyzConfig {
         }
       }
       if (value is String) {
-        r = custromTr(
-          value,
-          opening: this._opening,
-          closing: this._closing,
-          delimiter: this._delimiter,
-          args: global,
-        );
+        r = _handle(value, global, this.opening, this.closing);
+        // r = custromTr(
+        //   value,
+        //   opening: this._opening,
+        //   closing: this._closing,
+        //   delimiter: this._delimiter,
+        //   args: global,
+        // );
       } else {
         r = value;
       }

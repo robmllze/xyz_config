@@ -31,8 +31,8 @@ dynamic _handle(
 extension ReplaceHandles on String {
   String replaceHandles(
     Map<String, dynamic> handles, [
-    String opening = r"\(\=",
-    String closing = r"\)",
+    String opening = "(=",
+    String closing = ")",
   ]) {
     return _handle(this, handles, opening, closing).toString();
   }
