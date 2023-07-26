@@ -1,1 +1,8 @@
 message: "Testing 123..."
+who: "myself"
+user:
+  name: Donald
+  age: 42
+  surname: McFlurry
+  middle-names: [Frank, Gerhard]
+  phrase: My name is (=.name) (=.surname). I am (=.age) years old and my favorite sport is (=sport).

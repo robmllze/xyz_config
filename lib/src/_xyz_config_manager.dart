@@ -102,8 +102,8 @@ class XyzConfigManager {
     final g = this.getByPath(path);
     assert(g != null);
     if (g != null) {
-      _selected = g;
-      return _selected;
+      this._selected = g;
+      return this._selected;
     }
     return null;
   }
@@ -133,8 +133,8 @@ class XyzConfigManager {
     final g = this.getByConfigRef(configRef);
     assert(g != null);
     if (g != null) {
-      _selected = g;
-      return _selected;
+      this._selected = g;
+      return this._selected;
     }
     return null;
   }

@@ -8,17 +8,19 @@ part of 'xyz_config.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-dynamic _handle(
+dynamic $handle(
   String input,
   Map<dynamic, dynamic> handles,
   String opening,
   String closing,
 ) {
+  final escOpening = RegExp.escape(opening);
+  final escClosing = RegExp.escape(closing);
   var copy = input;
   for (final entry in handles.entries) {
     final k = entry.key;
     final v = entry.value;
-    final source = "$opening$k$closing";
+    final source = "$escOpening$k$escClosing";
     if (input == source) return v;
     final expression = RegExp(source, caseSensitive: false);
     copy = copy.replaceAll(expression, v.toString());
@@ -34,6 +36,6 @@ extension ReplaceHandles on String {
     String opening = "(=",
     String closing = ")",
   ]) {
-    return _handle(this, handles, opening, closing).toString();
+    return $handle(this, handles, opening, closing).toString();
   }
 }

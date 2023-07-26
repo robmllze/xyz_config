@@ -45,10 +45,6 @@ class XyzConfig {
   //
   //
 
-  //
-  //
-  //
-
   factory XyzConfig(
     XyzConfigRef configRef,
     Future<String> Function() loader, {
@@ -79,7 +75,7 @@ class XyzConfig {
   }
 
   void _parseYaml(YamlMap input) {
-    _parse<YamlList, YamlMap>(input, _fields);
+    this._parse<YamlList, YamlMap>(input, this._fields);
   }
 
   //
@@ -118,7 +114,7 @@ class XyzConfig {
 
   void _parseJson(String input) {
     final decoded = jsonDecode(input);
-    _parse<List, Map>(decoded, _fields);
+    this._parse<List, Map>(decoded, this._fields);
   }
 
   //
@@ -151,7 +147,7 @@ class XyzConfig {
           r[k] = py;
         }
       } else if (input is String) {
-        r = _handle(input, local, this.opening, this.closing);
+        r = $handle(input, local, this.opening, this.closing);
         // r = custromTr(
         //   input,
         //   opening: this._opening,
@@ -189,7 +185,7 @@ class XyzConfig {
         }
       }
       if (value is String) {
-        r = _handle(value, global, this.opening, this.closing);
+        r = $handle(value, global, this.opening, this.closing);
         // r = custromTr(
         //   value,
         //   opening: this._opening,

@@ -31,7 +31,7 @@ extension XyzConfigTranslate on String {
   T? translate<T>([Map<dynamic, dynamic> args = const {}, T? fallback]) {
     try {
       final manager = XyzConfigManager._translationManager!;
-      final fields = manager._selected!.config._fields;
+      final fields = {...manager._selected!.config._fields, ...args};
       final match = () {
         try {
           return fields.entries
@@ -46,9 +46,9 @@ extension XyzConfigTranslate on String {
           return fallback.toString();
         }
       }();
-      final handled = _handle(
+      final handled = $handle(
         match,
-        {...fields, ...args},
+        fields,
         manager.opening,
         manager.closing,
       );
