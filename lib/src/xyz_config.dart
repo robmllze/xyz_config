@@ -5,7 +5,7 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
 import 'dart:convert' show jsonDecode;
-import 'package:xyz_utils/xyz_utils.dart' show let;
+import 'package:xyz_utils/xyz_utils.dart' show let, replaceAllPatterns;
 import 'package:yaml/yaml.dart' show YamlMap, YamlList, loadYaml;
 
 import 'parse_source_for_strings_and_comments.dart';
@@ -14,7 +14,6 @@ part '_xyz_config_ref.dart';
 part '_xyz_config_file.dart';
 part '_xyz_config_manager.dart';
 part '_xyz_config_translate.dart';
-part '_handle.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -147,7 +146,7 @@ class XyzConfig {
           r[k] = py;
         }
       } else if (input is String) {
-        r = $handle(input, local, this.opening, this.closing);
+        r = replaceAllPatterns(input, local, this.opening, this.closing);
         // r = custromTr(
         //   input,
         //   opening: this._opening,
@@ -185,7 +184,7 @@ class XyzConfig {
         }
       }
       if (value is String) {
-        r = $handle(value, global, this.opening, this.closing);
+        r = replaceAllPatterns(value, global, this.opening, this.closing);
         // r = custromTr(
         //   value,
         //   opening: this._opening,

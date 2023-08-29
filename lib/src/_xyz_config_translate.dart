@@ -46,7 +46,7 @@ extension XyzConfigTranslate on String {
           return fallback.toString();
         }
       }();
-      final handled = $handle(
+      final handled = replaceAllPatterns(
         match,
         fields,
         manager.opening,
