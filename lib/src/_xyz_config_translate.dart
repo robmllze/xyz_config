@@ -46,13 +46,13 @@ extension XyzConfigTranslate on String {
           return fallback.toString();
         }
       }();
-      final handled = replaceAllPatterns(
+      final r = replaceAllPatterns(
         match,
         fields,
         manager.opening,
         manager.closing,
       );
-      return let<T>(handled) ?? fallback;
+      return let<T>(r) ?? fallback;
     } catch (_) {}
     return null;
   }
