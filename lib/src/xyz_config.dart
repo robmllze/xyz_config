@@ -47,8 +47,8 @@ class XyzConfig {
   factory XyzConfig(
     XyzConfigRef configRef,
     Future<String> Function() loader, {
-    String opening = "(=",
-    String closing = ")",
+    String opening = "<<<",
+    String closing = ">>>",
     String delimiter = "||",
   }) {
     return XyzConfig._(

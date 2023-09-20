@@ -60,8 +60,8 @@ class XyzConfigManager {
   factory XyzConfigManager.create(
     Map<dynamic, XyzConfigFileRef> files,
     Future<String> Function(String path) reader, {
-    String opening = "(=",
-    String closing = ")",
+    String opening = "<<<",
+    String closing = ">>>",
     String delimiter = "||",
   }) {
     final configs = <XyzConfigFile>{};

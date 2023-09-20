@@ -2,8 +2,6 @@
 //
 // XYZ Utils
 //
-// TODO: Needs rigorous testing. I don't think the escaping works everywhere.
-//
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 
 part of 'xyz_config.dart';
@@ -70,11 +68,10 @@ extension XyzConfigTranslate on String {
 
 String custromTr(
   String input, {
-  String opening = "(=",
-  String closing = ")",
+  String opening = "<<<",
+  String closing = ">>>",
   String delimiter = "||",
   Map<dynamic, dynamic> args = const {},
-  List<String> excapeChars = const ["\\", "/"],
 }) {
   // Shorten the function.
   String translatePart(String input) {
@@ -84,13 +81,11 @@ String custromTr(
       closing,
       delimiter,
       args,
-      excapeChars,
     );
   }
 
   // Find all scopes and subscopes enclosed by opening and closing in input.
-  final scopes = _findScopes(input, opening, closing, excapeChars);
-
+  final scopes = _findScopes(input, opening, closing);
   var result = scopes.removeLast();
   while (scopes.isNotEmpty) {
     final lastScope = scopes.removeLast();
@@ -107,8 +102,8 @@ String custromTr(
 /// ### Example:
 ///
 /// ```dart
-/// print(_translatePart("(=hello dude||message)", "(=", ")", "||", {}));  // prints "hello dude"
-/// print(_translatePart("hello dude||message", "(=", ")", "||", {"message": "hello world"}));  // prints "hello world"
+/// print(_translatePart("(=hello dude||message)", "<<<", ">>>", "||", {}));  // prints "hello dude"
+/// print(_translatePart("hello dude||message", "<<<", ">>>", "||", {"message": "hello world"}));  // prints "hello world"
 /// ```
 String _translatePart(
   String input,
@@ -116,14 +111,14 @@ String _translatePart(
   String closing,
   String delimiter,
   Map<dynamic, dynamic> args, [
-  List<String> excapeChars = const ["\\", "/"],
+  String excapeChar = "\\",
 ]) {
   // Remove the opening and closing strings from the input.
   final body = input.startsWith(opening) && input.endsWith(closing)
       ? input.substring(opening.length, input.length - closing.length)
       : input;
   // Split the body by the delimiter.
-  final components = _customSplit(body, delimiter, excapeChars);
+  final components = _customSplit(body, delimiter, excapeChar);
   // Get the length of the components.
   final length = components.length;
   // Set the key and fallback values based on the number of components.
@@ -149,28 +144,29 @@ String _translatePart(
 //
 
 /// A custom implementation of [String.split] that supports escaping with
-/// [excapeChars].
+/// [escapeChar].
 List<String> _customSplit(
   String input,
   String delimiter, [
-  List<String> excapeChars = const ["\\", "/"],
+  String escapeChar = "\\",
 ]) {
   final result = <String>[];
   final buffer = StringBuffer();
   var escapeMode = false;
+
   for (var i = 0; i < input.length; i++) {
-    final c = input[i];
     if (escapeMode) {
-      buffer.write(c);
+      buffer.write(input[i]);
       escapeMode = false;
-    } else if (excapeChars.contains(c)) {
+    } else if (input.startsWith(escapeChar, i)) {
       escapeMode = true;
+      i += escapeChar.length - 1;
     } else if (input.startsWith(delimiter, i)) {
       result.add(buffer.toString());
       buffer.clear();
       i += delimiter.length - 1;
     } else {
-      buffer.write(c);
+      buffer.write(input[i]);
     }
   }
 
@@ -189,9 +185,8 @@ List<String> _customSplit(
 List<String> _findScopes(
   String input,
   String opening,
-  String closing, [
-  List<String> excapeChars = const ["\\", "/"],
-]) {
+  String closing,
+) {
   final results = <String>[];
   final stack = <int>[];
   // Ensure the input is enclosed with the opening and closing strings.
@@ -199,11 +194,6 @@ List<String> _findScopes(
       !input.startsWith(opening) || !input.endsWith(closing) ? "$opening$input$closing" : input;
   // Iterate through the characters of the enclosed input string.
   for (var i = 0; i < enclosed.length; i++) {
-    final c = enclosed[i];
-    // Skip the next character if an escape character is found.
-    if (excapeChars.contains(c)) {
-      i++;
-    } else
     // If the opening string is found at position i.
     if (enclosed.startsWith(opening, i)) {
       // Push the current index to the stack.
@@ -236,8 +226,8 @@ List<String> _findScopes(
 /// ### Example:
 ///
 /// ```dart
-/// print(_extractNestedString("...(=(=test))...", 3, "(=", ")"));  // prints "(=(=test))"
-/// print(_extractNestedString("...(=(=test))...", 5, "(=", ")"));  // prints "(=test)"
+/// print(_extractScope("...(=(=test))...", 3, "<<<", ">>>"));  // prints "(=(=test))"
+/// print(_extractScope("...(=(=test))...", 5, "<<<", ">>>"));  // prints "(=test)"
 /// ```
 String _extractScope(
   String input,
