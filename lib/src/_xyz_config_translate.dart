@@ -271,6 +271,40 @@ String _extractScope(
 
 class Tr {
   final String data;
-  const Tr(this.data);
-  String tr([Map<dynamic, dynamic> args = const {}]) => data.tr();
+  final Map<dynamic, dynamic> args;
+  const Tr(
+    this.data, {
+    this.args = const {},
+  });
+  String tr([Map<dynamic, dynamic> moreArgs = const {}]) {
+    return data.tr({
+      ...this.args,
+      ...moreArgs,
+    });
+  }
+}
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+class Translate<T> {
+  final String data;
+  final Map<dynamic, dynamic> args;
+  final T? fallback;
+  const Translate(
+    this.data, {
+    this.args = const {},
+    this.fallback,
+  });
+  T? translate({
+    Map<dynamic, dynamic> args = const {},
+    T? fallback,
+  }) {
+    return data.translate<T>(
+      {
+        ...this.args,
+        ...args,
+      },
+      fallback ?? this.fallback,
+    );
+  }
 }
