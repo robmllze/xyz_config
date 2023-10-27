@@ -270,31 +270,66 @@ String _extractScope(
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 class Tr {
+  //
+  //
+  //
+
   final String data;
   final Map<dynamic, dynamic> args;
+
+  //
+  //
+  //
+
   const Tr(
     this.data, {
     this.args = const {},
   });
+
+  //
+  //
+  //
+
   String tr([Map<dynamic, dynamic> moreArgs = const {}]) {
     return data.tr({
       ...this.args,
       ...moreArgs,
     });
   }
+
+  //
+  //
+  //
+
+  @override
+  String toString() => this.tr();
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 class Translate<T> {
+  //
+  //
+  //
+
   final String data;
   final Map<dynamic, dynamic> args;
   final T? fallback;
+
+  //
+  //
+  //
+
   const Translate(
     this.data, {
     this.args = const {},
     this.fallback,
   });
+
+  //
+  //
+  //
+
   T? translate({
     Map<dynamic, dynamic> args = const {},
     T? fallback,
@@ -307,4 +342,11 @@ class Translate<T> {
       fallback ?? this.fallback,
     );
   }
+
+  //
+  //
+  //
+
+  @override
+  String toString() => this.translate().toString();
 }
