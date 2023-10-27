@@ -266,3 +266,11 @@ String _extractScope(
   // closing string.
   return input.substring(startIndex, i + closing.length);
 }
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+class Tr {
+  final String data;
+  const Tr(this.data);
+  String tr([Map<dynamic, dynamic> args = const {}]) => data.tr();
+}
