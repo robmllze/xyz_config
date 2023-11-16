@@ -1,22 +1,24 @@
+//.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// XYZ Utils
+// XYZ Config
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+//.title~
 
 part of 'xyz_config.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class XyzConfigRef<T> {
+class ConfigRef<T> {
   final T refCode;
-  const XyzConfigRef(this.refCode);
+  const ConfigRef(this.refCode);
 
   @override
   String toString() => this.refCode.toString();
 
   @override
-  bool operator ==(final other) => other is XyzConfigRef && other.hashCode == this.hashCode;
+  bool operator ==(final other) => other is ConfigRef && other.hashCode == this.hashCode;
 
   @override
   int get hashCode => this.refCode.hashCode;
@@ -24,7 +26,7 @@ class XyzConfigRef<T> {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class XyzLocaleRef extends XyzConfigRef {
+class LocaleRef extends ConfigRef {
   //
   //
   //
@@ -37,7 +39,7 @@ class XyzLocaleRef extends XyzConfigRef {
   //
   //
 
-  XyzLocaleRef(
+  LocaleRef(
     this.languageCode,
     this.countryCode,
   ) : super("${languageCode}_$countryCode".toLowerCase());
@@ -46,13 +48,13 @@ class XyzLocaleRef extends XyzConfigRef {
   //
   //
 
-  factory XyzLocaleRef.fromCode(String localeCode) {
+  factory LocaleRef.fromCode(String localeCode) {
     final parts = localeCode.split("_");
     if (parts.length >= 2) {
       final languageCode = parts[0];
       final countryCode = parts[1];
-      return XyzLocaleRef(languageCode, countryCode);
+      return LocaleRef(languageCode, countryCode);
     }
-    return XyzLocaleRef("en", "us");
+    return LocaleRef("en", "us");
   }
 }

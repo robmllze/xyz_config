@@ -1,30 +1,32 @@
+//.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// XYZ Utils
+// XYZ Config
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+//.title~
 
 part of 'xyz_config.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class XyzConfigFile {
-  final XyzConfigFileRef fileRef;
-  final XyzConfig config;
-  const XyzConfigFile(
+class ConfigFile {
+  final ConfigFileRef fileRef;
+  final Config config;
+  const ConfigFile(
     this.fileRef,
     this.config,
   );
 
   Future<bool> process() async {
     switch (this.fileRef.type) {
-      case XyzConfigFileType.JSON:
+      case ConfigFileType.JSON:
         await this.config._processFromJson();
         break;
-      case XyzConfigFileType.JSONC:
+      case ConfigFileType.JSONC:
         await this.config._processFromJsonc();
         break;
-      case XyzConfigFileType.YAML:
+      case ConfigFileType.YAML:
         await this.config._processFromYaml();
         break;
       default:
@@ -36,20 +38,20 @@ class XyzConfigFile {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class XyzConfigFileRef {
+class ConfigFileRef {
   final String path;
-  final XyzConfigFileType type;
+  final ConfigFileType type;
   final String? alias;
-  const XyzConfigFileRef(
+  const ConfigFileRef(
     this.path, {
-    this.type = XyzConfigFileType.YAML,
+    this.type = ConfigFileType.YAML,
     this.alias,
   });
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-enum XyzConfigFileType {
+enum ConfigFileType {
   JSON,
   JSONC,
   YAML,

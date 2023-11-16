@@ -1,8 +1,10 @@
+//.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// XYZ Utils
+// XYZ Config
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+//.title~
 
 part of 'xyz_config.dart';
 
@@ -21,14 +23,14 @@ extension SplitByLastOccurrenceOf on String {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-extension XyzConfigTranslate on String {
+extension ConfigTranslate on String {
   //
   //
   //
 
   T? translate<T>([Map<dynamic, dynamic> args = const {}, T? fallback]) {
     try {
-      final manager = XyzConfigManager._translationManager!;
+      final manager = ConfigManager._translationManager!;
       final fields = {...manager._selected!.config._fields, ...args};
       final match = () {
         try {

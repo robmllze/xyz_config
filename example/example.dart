@@ -17,34 +17,34 @@ void main() async {
   // ---------------------------------------------------------------------------
 
   // Step 1: Create a XyzConfigManager object.
-  final managerLocal = XyzConfigManager.create(
+  final managerLocal = ConfigManager.create(
     // Step 2: Specify all your configurations.
     {
       // 1.
-      const XyzConfigRef("test"): const XyzConfigFileRef(
+      const ConfigRef("test"): const ConfigFileRef(
         "test.yaml", // file path to this configuration
         alias: "Test", // give it some name
-        type: XyzConfigFileType.YAML, // type of file
+        type: ConfigFileType.YAML, // type of file
       ),
       // 2.
-      XyzLocaleRef("AU", "en"): const XyzConfigFileRef(
+      LocaleRef("AU", "en"): const ConfigFileRef(
         "translations/AU-en.yaml",
         alias: "English (AU)",
       ),
       // 3.
-      XyzLocaleRef("UK", "en"): const XyzConfigFileRef(
+      LocaleRef("UK", "en"): const ConfigFileRef(
         "translations/UK-en.jsonc",
         alias: "English (UK)",
-        type: XyzConfigFileType.JSONC,
+        type: ConfigFileType.JSONC,
       ),
       // 4.
-      XyzLocaleRef("US", "en"): const XyzConfigFileRef(
+      LocaleRef("US", "en"): const ConfigFileRef(
         "translations/US-en.json",
         alias: "English (US)",
-        type: XyzConfigFileType.JSON,
+        type: ConfigFileType.JSON,
       ),
       // 5.
-      "pubspec.yaml": const XyzConfigFileRef("pubspec.yaml"),
+      "pubspec.yaml": const ConfigFileRef("pubspec.yaml"),
     },
     // Step 3. Specify how the configurations should be loaded.
     (final path) => File(path).readAsString(),
@@ -52,9 +52,9 @@ void main() async {
 
   // ---------------------------------------------------------------------------
 
-  final managerRemote = XyzConfigManager.create(
+  final managerRemote = ConfigManager.create(
     {
-      XyzLocaleRef("AU", "en"): const XyzConfigFileRef(
+      LocaleRef("AU", "en"): const ConfigFileRef(
         "https://firebasestorage.googleapis.com/v0/b/xyz-engine.appspot.com/o/AU-en.yaml?alt=media&token=eee6fd63-e6b7-4e14-80f2-c63b059d3bd5",
         alias: "English (AU)",
       ),
@@ -74,16 +74,16 @@ void main() async {
 
   // Iterate through configuration refs.
   for (final locale in [
-    XyzLocaleRef("AU", "en"),
-    XyzLocaleRef("UK", "en"),
-    XyzLocaleRef("US", "en"),
+    LocaleRef("AU", "en"),
+    LocaleRef("UK", "en"),
+    LocaleRef("US", "en"),
     "pubspec.yaml",
   ]) {
-    XyzConfigFile? file;
+    ConfigFile? file;
     print("\n----------------------------------------------------------------\n");
 
     // Load the configuration files.
-    if (locale == XyzLocaleRef("AU", "en")) {
+    if (locale == LocaleRef("AU", "en")) {
       file = await managerRemote.loadFileByConfigRef(locale);
     } else {
       file = await managerLocal.loadFileByConfigRef(locale);

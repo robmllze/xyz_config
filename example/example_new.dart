@@ -13,12 +13,12 @@ import 'dart:io';
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 void main() async {
-  final managerLocal = XyzConfigManager.create(
+  final managerLocal = ConfigManager.create(
     {
-      const XyzConfigRef("test"): const XyzConfigFileRef(
+      const ConfigRef("test"): const ConfigFileRef(
         "test.yaml",
         alias: "Test",
-        type: XyzConfigFileType.YAML,
+        type: ConfigFileType.YAML,
       ),
     },
     (final path) => File(path).readAsString(),

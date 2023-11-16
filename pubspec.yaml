@@ -6,7 +6,7 @@
 
 name: xyz_config
 description: Configure your app from .json, .jsonc and .yaml files
-version: 0.6.0
+version: 0.7.0
 publish_to: none
 environment:
   sdk: '>= 3.0.0 < 4.0.0'
@@ -18,6 +18,6 @@ dependencies:
     git:
       url: https://github.com/robmllze/xyz_utils.git
       ref: master
-  yaml: ^3.1.0
+  yaml:
 dev_dependencies:
-  lints: ^2.0.0
+  lints:

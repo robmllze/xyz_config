@@ -4,7 +4,7 @@
   "config_file.version": 1,
   "config_file.type": "JSON",
   "app": {
-    "name": "Xyz Config Example",
+    "name": "XYZ Config Example",
     "url": "https://config-example.xyz",
     "version": "0.1.0",
     "builds": [

@@ -1,19 +1,21 @@
+//.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// XYZ Utils
+// XYZ Config
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+//.title~
 
 part of 'xyz_config.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class XyzConfigManager {
+class ConfigManager {
   //
   //
   //
 
-  static XyzConfigManager? _translationManager;
+  static ConfigManager? _translationManager;
 
   void selectAsTranslationManager() {
     _translationManager = this;
@@ -23,16 +25,16 @@ class XyzConfigManager {
   //
   //
 
-  XyzConfigFile? _selected;
-  XyzConfigFile? get selectedFile => this._selected;
-  final Set<XyzConfigFile> files;
+  ConfigFile? _selected;
+  ConfigFile? get selectedFile => this._selected;
+  final Set<ConfigFile> files;
   final String opening, closing, delimiter;
 
   //
   //
   //
 
-  XyzConfigManager._(
+  ConfigManager._(
     this.files,
     this.opening,
     this.closing,
@@ -57,29 +59,29 @@ class XyzConfigManager {
   //
   //
 
-  factory XyzConfigManager.create(
-    Map<dynamic, XyzConfigFileRef> files,
+  factory ConfigManager.create(
+    Map<dynamic, ConfigFileRef> files,
     Future<String> Function(String path) reader, {
     String opening = "<<<",
     String closing = ">>>",
     String delimiter = "||",
   }) {
-    final configs = <XyzConfigFile>{};
+    final configs = <ConfigFile>{};
     for (final entry in files.entries) {
-      XyzConfig? config;
+      Config? config;
       final configRef = entry.key;
       final fileRef = entry.value;
       final path = fileRef.path;
-      config = XyzConfig(
+      config = Config(
         _convertConfigRef(configRef),
         () => reader(path),
         opening: opening,
         closing: closing,
         delimiter: delimiter,
       );
-      configs.add(XyzConfigFile(fileRef, config));
+      configs.add(ConfigFile(fileRef, config));
     }
-    return XyzConfigManager._(
+    return ConfigManager._(
       configs,
       opening,
       closing,
@@ -91,14 +93,14 @@ class XyzConfigManager {
   //
   //
 
-  XyzConfigFile? getByPath(String path) {
-    return this.files.cast<XyzConfigFile?>().firstWhere(
+  ConfigFile? getByPath(String path) {
+    return this.files.cast<ConfigFile?>().firstWhere(
           (final l) => l!.fileRef.path == path,
           orElse: () => null,
         );
   }
 
-  XyzConfigFile? selectByPath(String path) {
+  ConfigFile? selectByPath(String path) {
     final g = this.getByPath(path);
     assert(g != null);
     if (g != null) {
@@ -108,7 +110,7 @@ class XyzConfigManager {
     return null;
   }
 
-  Future<XyzConfigFile?> loadFileByPath(String path) async {
+  Future<ConfigFile?> loadFileByPath(String path) async {
     final g = this.getByPath(path);
     if (await g?.process() == true) {
       return g;
@@ -120,8 +122,8 @@ class XyzConfigManager {
   //
   //
 
-  XyzConfigFile? getByConfigRef(dynamic configRef) {
-    return this.files.cast<XyzConfigFile?>().firstWhere(
+  ConfigFile? getByConfigRef(dynamic configRef) {
+    return this.files.cast<ConfigFile?>().firstWhere(
       (final l) {
         return l!.config.configRef == _convertConfigRef(configRef);
       },
@@ -129,7 +131,7 @@ class XyzConfigManager {
     );
   }
 
-  XyzConfigFile? selectByConfigRef(dynamic configRef) {
+  ConfigFile? selectByConfigRef(dynamic configRef) {
     final g = this.getByConfigRef(configRef);
     assert(g != null);
     if (g != null) {
@@ -139,7 +141,7 @@ class XyzConfigManager {
     return null;
   }
 
-  Future<XyzConfigFile?> loadFileByConfigRef(dynamic configRef) async {
+  Future<ConfigFile?> loadFileByConfigRef(dynamic configRef) async {
     final g = this.getByConfigRef(configRef);
     if (await g?.process() == true) {
       return g;
@@ -150,6 +152,6 @@ class XyzConfigManager {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-XyzConfigRef _convertConfigRef(dynamic configRef) {
-  return configRef is XyzConfigRef ? configRef : XyzConfigRef(configRef);
+ConfigRef _convertConfigRef(dynamic configRef) {
+  return configRef is ConfigRef ? configRef : ConfigRef(configRef);
 }

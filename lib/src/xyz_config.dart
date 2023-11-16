@@ -1,8 +1,10 @@
+//.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// XYZ Utils
+// XYZ Config
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+//.title~
 
 import 'dart:convert' show jsonDecode;
 import 'package:xyz_utils/xyz_utils.dart' show let, replaceAllPatterns;
@@ -10,21 +12,21 @@ import 'package:yaml/yaml.dart' show YamlMap, YamlList, loadYaml;
 
 import 'parse_source_for_strings_and_comments.dart';
 
-part '_xyz_config_ref.dart';
-part '_xyz_config_file.dart';
-part '_xyz_config_manager.dart';
-part '_xyz_config_translate.dart';
+part '_config_ref.dart';
+part '_config_file.dart';
+part '_config_manager.dart';
+part '_config_translate.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class XyzConfig {
+class Config {
   //
   //
   //
 
   final Map<dynamic, dynamic> _fields = {};
   Map<dynamic, dynamic> get fields => this._fields;
-  final XyzConfigRef configRef;
+  final ConfigRef configRef;
   final String opening, closing, delimiter;
   Future<String> Function() loader;
 
@@ -32,7 +34,7 @@ class XyzConfig {
   //
   //
 
-  XyzConfig._(
+  Config._(
     this.configRef,
     this.loader,
     this.opening,
@@ -44,14 +46,14 @@ class XyzConfig {
   //
   //
 
-  factory XyzConfig(
-    XyzConfigRef configRef,
+  factory Config(
+    ConfigRef configRef,
     Future<String> Function() loader, {
     String opening = "<<<",
     String closing = ">>>",
     String delimiter = "||",
   }) {
-    return XyzConfig._(
+    return Config._(
       configRef,
       loader,
       opening,
