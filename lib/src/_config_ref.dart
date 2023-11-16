@@ -58,3 +58,13 @@ class LocaleRef extends ConfigRef {
     return LocaleRef("en", "us");
   }
 }
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+LocaleRef? localeCodeToRef(String localeCode) {
+  final parts = localeCode.split("_");
+  if (parts.length == 2) {
+    return LocaleRef(parts[0], parts[1]);
+  }
+  return null;
+}

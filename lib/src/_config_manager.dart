@@ -148,6 +148,17 @@ class ConfigManager {
     }
     return null;
   }
+
+  //
+  //
+  //
+
+  Iterable<LocaleRef> localeRefs() {
+    return this.files.map((final l) {
+      final ref = l.config.configRef;
+      return ref is LocaleRef ? ref : null;
+    }).nonNulls;
+  }
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
