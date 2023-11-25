@@ -7,7 +7,7 @@
 //.title~
 
 import 'dart:convert' show jsonDecode;
-import 'package:xyz_utils/xyz_utils.dart' show let, replaceAllPatterns;
+import 'package:xyz_utils/html.dart' show let, replaceAllPatterns;
 import 'package:yaml/yaml.dart' show YamlMap, YamlList, loadYaml;
 
 import 'parse_source_for_strings_and_comments.dart';
