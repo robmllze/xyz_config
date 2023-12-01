@@ -6,7 +6,7 @@
 
 // ignore_for_file: unused_local_variable, omit_local_variable_types
 
-import 'package:xyz_config/xyz_config.dart';
+import 'package:xyz_config/all.dart';
 
 import 'dart:io';
 
