@@ -1,6 +1,4 @@
 .dart_tool/
-.DS_Store
-.vscode/
 build/
 package_config.json
 pubspec.lock
