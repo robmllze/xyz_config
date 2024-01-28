@@ -17,7 +17,10 @@ extension SplitByLastOccurrenceOf on String {
     if (splitIndex == -1) {
       return [this];
     }
-    return [this.substring(0, splitIndex), this.substring(splitIndex + separator.length)];
+    return [
+      this.substring(0, splitIndex),
+      this.substring(splitIndex + separator.length)
+    ];
   }
 }
 
@@ -192,8 +195,9 @@ List<String> _findScopes(
   final results = <String>[];
   final stack = <int>[];
   // Ensure the input is enclosed with the opening and closing strings.
-  final enclosed =
-      !input.startsWith(opening) || !input.endsWith(closing) ? "$opening$input$closing" : input;
+  final enclosed = !input.startsWith(opening) || !input.endsWith(closing)
+      ? "$opening$input$closing"
+      : input;
   // Iterate through the characters of the enclosed input string.
   for (var i = 0; i < enclosed.length; i++) {
     // If the opening string is found at position i.

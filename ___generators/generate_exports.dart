@@ -1,30 +1,35 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// XYZ Config
+// XYZ Gen
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import 'package:xyz_config/all.dart';
-
-import 'dart:io';
+import 'package:xyz_gen/generators/generate_exports/all_generate_exports.g.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-void main() async {
-  final managerLocal = ConfigManager.create(
-    {
-      const ConfigRef("test"): const ConfigFileRef(
-        "test.yaml",
-        alias: "Test",
-        type: ConfigFileType.YAML,
-      ),
-    },
-    (final path) => File(path).readAsString(),
-  );
-
-  await managerLocal.loadFileByPath("test.yaml");
-
-  print("Hello how are you (=name)?".tr({"name": "Bob1"}));
+void main(List<String> arguments) async {
+  await generateExportsApp([
+    if (arguments.isNotEmpty)
+      ...arguments
+    else ...[
+      // Template file path.
+      "-t",
+      "___generators/templates/generate_exports/default_exports_template.dart.md",
+      // Root directories.
+      "-r",
+      [
+        "lib",
+      ].join(":"),
+      // Sub-directories.
+      "-s",
+      [
+        "",
+        "components",
+        "utils",
+      ].join(":"),
+    ],
+  ]);
 }

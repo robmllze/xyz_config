@@ -18,7 +18,8 @@ class ConfigRef<T> {
   String toString() => this.refCode.toString();
 
   @override
-  bool operator ==(final other) => other is ConfigRef && other.hashCode == this.hashCode;
+  bool operator ==(final other) =>
+      other is ConfigRef && other.hashCode == this.hashCode;
 
   @override
   int get hashCode => this.refCode.hashCode;

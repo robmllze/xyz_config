@@ -1,10 +1,10 @@
+//.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// XYZ Config Example
+// XYZ Config
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-
-// ignore_for_file: unused_local_variable, omit_local_variable_types
+//.title~
 
 import 'package:xyz_config/all.dart';
 
@@ -80,7 +80,8 @@ void main() async {
     "pubspec.yaml",
   ]) {
     ConfigFile? file;
-    print("\n----------------------------------------------------------------\n");
+    print(
+        "\n----------------------------------------------------------------\n");
 
     // Load the configuration files.
     if (locale == LocaleRef("AU", "en")) {
@@ -97,7 +98,8 @@ void main() async {
     final alias = file?.fileRef.alias;
     print("Alias: $alias\n");
     final fields = file?.config.fields;
-    final preview = fields?.entries.map((final l) => "${l.key}: ${l.value}").join("\n");
+    final preview =
+        fields?.entries.map((final l) => "${l.key}: ${l.value}").join("\n");
     print("Preview:\n\n$preview");
     final apiKey0 = fields?["app.args.3"];
     final apiKey1 = "app.args.3".tr();

@@ -1,30 +1,29 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// XYZ Config
+// XYZ Gen
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import 'package:xyz_config/all.dart';
-
-import 'dart:io';
+import 'package:xyz_gen/generators/generate_license_headers/all_generate_license_headers.g.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-void main() async {
-  final managerLocal = ConfigManager.create(
-    {
-      const ConfigRef("test"): const ConfigFileRef(
-        "test.yaml",
-        alias: "Test",
-        type: ConfigFileType.YAML,
-      ),
-    },
-    (final path) => File(path).readAsString(),
-  );
-
-  await managerLocal.loadFileByPath("test.yaml");
-
-  print("Hello how are you (=name)?".tr({"name": "Bob1"}));
+void main(List<String> arguments) {
+  generateLicenseHeadersApp([
+    if (arguments.isNotEmpty)
+      ...arguments
+    else ...[
+      // Template file path.
+      "-t",
+      "___generators/templates/generate_license_headers/default_license_header_template.dart.md",
+      // Root directories.
+      "-r",
+      [
+        "lib",
+        "example",
+      ].join(":"),
+    ],
+  ]);
 }
