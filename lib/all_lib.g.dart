@@ -9,5 +9,11 @@
 
 library;
 
+export 'src/all_src.g.dart';
+export 'src/config/config.dart';
+export 'src/config_ref.dart';
+export 'src/generate_jmap.dart';
+export 'src/locale_ref.dart';
 export 'src/parse_source_for_strings_and_comments.dart';
-export 'src/config.dart';
+export 'src/split_by_last_occurence_of.dart';
+export 'xyz_config.dart';

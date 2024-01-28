@@ -10,31 +10,16 @@ part of 'config.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-extension SplitByLastOccurrenceOf on String {
-  /// Splits the string by the last occurrence of [separator].
-  List<String> splitByLastOccurrenceOf(String separator) {
-    final splitIndex = this.lastIndexOf(separator);
-    if (splitIndex == -1) {
-      return [this];
-    }
-    return [
-      this.substring(0, splitIndex),
-      this.substring(splitIndex + separator.length)
-    ];
-  }
-}
-
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
 extension ConfigTranslate on String {
   //
   //
   //
 
   T? translate<T>([Map<dynamic, dynamic> args = const {}, T? fallback]) {
+    final flattened = flattenJMap(args);
     try {
       final manager = ConfigManager._translationManager!;
-      final fields = {...manager._selected!.config._fields, ...args};
+      final fields = {...manager._selected!.config.fields, ...flattened};
       final match = () {
         try {
           return fields.entries
@@ -139,9 +124,11 @@ String _translatePart(
     // Return the original input if theres a syntax error.
     return input;
   }
+  // Flatten the args.
+  final flattened = flattenJMap(args);
   // Try and translate the key and return the result or return the the fallback
   // value if the key is not found in the args.
-  return key.translate<String>(args, fallback) ?? fallback;
+  return key.translate<String>(flattened, fallback) ?? fallback;
 }
 
 //

@@ -6,14 +6,14 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import 'package:xyz_config/all_lib.g.dart';
-
 import 'dart:io';
+
+import 'package:xyz_config/xyz_config.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 void main() async {
-  final managerLocal = ConfigManager.create(
+  final configManager = ConfigManager.create(
     {
       const ConfigRef("test"): const ConfigFileRef(
         "test.yaml",
@@ -24,7 +24,15 @@ void main() async {
     (final path) => File(path).readAsString(),
   );
 
-  await managerLocal.loadFileByPath("test.yaml");
+  await configManager.loadFileByPath("test.yaml");
 
-  print("Hello how are you (=name)?".tr({"name": "Bob1"}));
+  print(
+    "Hello how are you <<<users.name>>>?".tr(
+      {
+        "users": {
+          "name": "Bob1",
+        }
+      },
+    ),
+  );
 }

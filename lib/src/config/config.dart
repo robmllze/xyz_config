@@ -6,15 +6,8 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import 'dart:convert' show jsonDecode;
+import '/_common.dart';
 
-import 'package:xyz_utils/shared/web_friendly/src/let.dart';
-import 'package:xyz_utils/web_friendly/patterns/replace_patterns.dart';
-import 'package:yaml/yaml.dart' show YamlMap, YamlList, loadYaml;
-
-import 'parse_source_for_strings_and_comments.dart';
-
-part '_config_ref.dart';
 part '_config_file.dart';
 part '_config_manager.dart';
 part '_config_translate.dart';
@@ -26,8 +19,7 @@ class Config {
   //
   //
 
-  final Map<dynamic, dynamic> _fields = {};
-  Map<dynamic, dynamic> get fields => this._fields;
+  final Map<dynamic, dynamic> fields = {};
   final ConfigRef configRef;
   final String opening, closing, delimiter;
   Future<String> Function() loader;
@@ -73,12 +65,12 @@ class Config {
     final yaml = loadYaml(src);
     if (yaml is YamlMap) {
       this._parseYaml(yaml);
-      this._replace(this._fields);
+      this._replace(this.fields);
     }
   }
 
   void _parseYaml(YamlMap input) {
-    this._parse<YamlList, YamlMap>(input, this._fields);
+    this._parse<YamlList, YamlMap>(input, this.fields);
   }
 
   //
@@ -88,11 +80,11 @@ class Config {
   Future<void> _processFromJsonc() async {
     final src = await this.loader();
     this._parseJsonc(src);
-    this._replace(this._fields);
+    this._replace(this.fields);
   }
 
   void _parseJsonc(String input) {
-    final result = parseCSourceForStringsAndComments(input);
+    final result = parseSourceForStringsAndComments(input);
 
     for (final c in result.multiLineComments) {
       input = input.replaceAll(c, "");
@@ -102,7 +94,7 @@ class Config {
       input = input.replaceAll(c, "");
     }
     final decoded = jsonDecode(input);
-    _parse<List, Map>(decoded, _fields);
+    _parse<List, Map>(decoded, this.fields);
   }
 
   //
@@ -112,12 +104,12 @@ class Config {
   Future<void> _processFromJson() async {
     final src = await this.loader();
     this._parseJson(src);
-    this._replace(this._fields);
+    this._replace(this.fields);
   }
 
   void _parseJson(String input) {
     final decoded = jsonDecode(input);
-    this._parse<List, Map>(decoded, this._fields);
+    this._parse<List, Map>(decoded, this.fields);
   }
 
   //

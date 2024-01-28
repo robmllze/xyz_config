@@ -6,24 +6,7 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-part of 'config.dart';
-
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
-class ConfigRef<T> {
-  final T refCode;
-  const ConfigRef(this.refCode);
-
-  @override
-  String toString() => this.refCode.toString();
-
-  @override
-  bool operator ==(final other) =>
-      other is ConfigRef && other.hashCode == this.hashCode;
-
-  @override
-  int get hashCode => this.refCode.hashCode;
-}
+import 'config_ref.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -32,9 +15,11 @@ class LocaleRef extends ConfigRef {
   //
   //
 
+  /// The language code, such as "en".
   final String languageCode;
+
+  /// The country code, such as "US".
   final String countryCode;
-  String get localeCode => super.refCode;
 
   //
   //
@@ -58,10 +43,18 @@ class LocaleRef extends ConfigRef {
     }
     return LocaleRef("en", "us");
   }
+
+  //
+  //
+  //
+
+  String get localeCode => super.refCode;
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
+/// Returns a [LocaleRef] from a [localeCode], or null if the [localeCode] is
+/// badly formatted.
 LocaleRef? localeCodeToRef(String localeCode) {
   final parts = localeCode.split("_");
   if (parts.length == 2) {

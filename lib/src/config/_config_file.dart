@@ -11,12 +11,25 @@ part of 'config.dart';
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 class ConfigFile {
+  //
+  //
+  //
+
   final ConfigFileRef fileRef;
   final Config config;
+
+  //
+  //
+  //
+
   const ConfigFile(
     this.fileRef,
     this.config,
   );
+
+  //
+  //
+  //
 
   Future<bool> process() async {
     switch (this.fileRef.type) {
@@ -39,9 +52,18 @@ class ConfigFile {
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 class ConfigFileRef {
+  //
+  //
+  //
+
   final String path;
   final ConfigFileType type;
   final String? alias;
+
+  //
+  //
+  //
+
   const ConfigFileRef(
     this.path, {
     this.type = ConfigFileType.YAML,
