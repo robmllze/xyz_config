@@ -27,8 +27,7 @@ void main(List<String> arguments) async {
       "-s",
       [
         "",
-        "components",
-        "utils",
+        "src",
       ].join(":"),
     ],
   ]);

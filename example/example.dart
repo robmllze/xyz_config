@@ -6,7 +6,7 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import 'package:xyz_config/all.dart';
+import 'package:xyz_config/all_lib.g.dart';
 
 import 'dart:io';
 import 'package:http/http.dart' as http;
@@ -55,7 +55,7 @@ void main() async {
   final managerRemote = ConfigManager.create(
     {
       LocaleRef("AU", "en"): const ConfigFileRef(
-        "https://firebasestorage.googleapis.com/v0/b/xyz-engine.appspot.com/o/AU-en.yaml?alt=media&token=eee6fd63-e6b7-4e14-80f2-c63b059d3bd5",
+        "https://firebasestorage.googleapis.com/v0/b/xyz...",
         alias: "English (AU)",
       ),
     },
@@ -80,8 +80,7 @@ void main() async {
     "pubspec.yaml",
   ]) {
     ConfigFile? file;
-    print(
-        "\n----------------------------------------------------------------\n");
+    print("\n----------------------------------------------------------------\n");
 
     // Load the configuration files.
     if (locale == LocaleRef("AU", "en")) {
@@ -98,8 +97,7 @@ void main() async {
     final alias = file?.fileRef.alias;
     print("Alias: $alias\n");
     final fields = file?.config.fields;
-    final preview =
-        fields?.entries.map((final l) => "${l.key}: ${l.value}").join("\n");
+    final preview = fields?.entries.map((final l) => "${l.key}: ${l.value}").join("\n");
     print("Preview:\n\n$preview");
     final apiKey0 = fields?["app.args.3"];
     final apiKey1 = "app.args.3".tr();
