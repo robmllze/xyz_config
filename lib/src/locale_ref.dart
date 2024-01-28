@@ -25,6 +25,7 @@ class LocaleRef extends ConfigRef {
   //
   //
 
+  /// Creates a new [LocaleRef] from a [languageCode] and a [countryCode].
   LocaleRef(
     this.languageCode,
     this.countryCode,
@@ -34,6 +35,7 @@ class LocaleRef extends ConfigRef {
   //
   //
 
+  /// Creates a new [LocaleRef] from a [localeCode].
   factory LocaleRef.fromCode(String localeCode) {
     final parts = localeCode.split("_");
     if (parts.length >= 2) {

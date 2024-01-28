@@ -31,8 +31,7 @@ class ConfigRef<T> {
   //
 
   @override
-  bool operator ==(final other) =>
-      other is ConfigRef && other.hashCode == this.hashCode;
+  bool operator ==(final other) => other is ConfigRef && other.hashCode == this.hashCode;
 
   //
   //
