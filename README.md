@@ -1,4 +1,4 @@
-# XYZ Utils
+# XYZ Config
 
 [![pub package](https://img.shields.io/pub/v/xyz_config.svg)](https://pub.dev/packages/xyz_config)
 
