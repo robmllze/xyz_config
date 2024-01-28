@@ -10,4 +10,4 @@
 library;
 
 export 'parse_source_for_strings_and_comments.dart';
-export 'xyz_config.dart';
+export 'config.dart';
