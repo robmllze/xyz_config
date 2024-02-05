@@ -21,7 +21,7 @@ void main() async {
         type: ConfigFileType.YAML,
       ),
     },
-    (final path) => File(path).readAsString(),
+    (path) => File(path).readAsString(),
   );
 
   await configManager.loadFileByPath("test.yaml");
