@@ -30,10 +30,3 @@ dependencies:
 dev_dependencies:
 
   lints: ^3.0.0
-
-## -----------------------------------------------------------------------------
-
-dependency_overrides:
-
-  xyz_utils:
-    path: ../xyz_utils
