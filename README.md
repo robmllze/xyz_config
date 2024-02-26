@@ -1,6 +1,6 @@
 # 🇽🇾🇿 Config
 
-[![pub package](https://img.shields.io/pub/v/xyz_config.svg)](https://pub.dev/packages/xyzxyz_config_flutter_plus)
+[![pub package](https://img.shields.io/pub/v/xyz_config.svg)](https://pub.dev/packages/xyz_config)
 
 This package is designed to help you configure your apps or add language support to your apps.
 

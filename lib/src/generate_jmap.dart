@@ -6,18 +6,6 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-/// Flattens a [Map] to a [Map] with a single level, for example:
-/// ```dart
-/// final input = {
-///  "a": {
-///   "b": {
-///   "c": "d",
-///  };
-/// };
-///
-/// final output = flattenJMap(input);
-/// print(output); // {"a.b.c": "d"}
-/// ```
 Map<String, dynamic> flattenJMap(Map input) {
   Map<String, dynamic> $flattenJMap(dynamic input, [String prefix = ""]) {
     final flattenedMap = <String, dynamic>{};
