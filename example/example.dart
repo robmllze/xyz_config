@@ -82,7 +82,8 @@ void main() async {
   ]) {
     ConfigFile? file;
     print(
-        "\n----------------------------------------------------------------\n");
+      "\n----------------------------------------------------------------\n",
+    );
 
     // Load the configuration files.
     if (locale == LocaleRef("AU", "en")) {

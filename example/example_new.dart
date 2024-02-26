@@ -31,7 +31,7 @@ void main() async {
       {
         "users": {
           "name": "Bob1",
-        }
+        },
       },
     ),
   );
