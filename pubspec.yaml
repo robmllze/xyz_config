@@ -1,15 +1,20 @@
 ##.title
 ## ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 ##
-## XYZ Config
+## X|Y|Z & Dev
 ##
+## Copyright Ⓒ Robert Mollentze, xyzand.dev
+## 
+## Licensing details can be found in the LICENSE file in the root directory.
+## 
 ## ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 ##.title~
+
 
 name: xyz_config
 description: This package is designed to help you configure your apps or add language support to your apps.
 repository: https://github.com/robmllze/xyz_config
-version: 0.12.1
+version: 0.13.0
 
 ## -----------------------------------------------------------------------------
 
@@ -21,7 +26,7 @@ environment:
 
 dependencies:
 
-  xyz_utils: ^0.36.0
+  xyz_utils: ^0.37.0
 
   yaml: ^3.1.2
 

@@ -1,14 +1,18 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// XYZ Config
+// X|Y|Z & Dev
+//
+// Copyright Ⓒ Robert Mollentze, xyzand.dev
+//
+// Licensing details can be found in the LICENSE file in the root directory.
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
 import 'dart:io';
 
-import 'package:xyz_config/all_lib.g.dart';
+import 'package:xyz_config/xyz_config.dart';
 
 // ignore: depend_on_referenced_packages
 import 'package:http/http.dart' as http;
@@ -101,8 +105,7 @@ void main() async {
     final alias = file?.fileRef.alias;
     print("Alias: $alias\n");
     final fields = file?.config.fields;
-    final preview =
-        fields?.entries.map((final l) => "${l.key}: ${l.value}").join("\n");
+    final preview = fields?.entries.map((final l) => "${l.key}: ${l.value}").join("\n");
     print("Preview:\n\n$preview");
     final apiKey0 = fields?["app.args.3"];
     final apiKey1 = "app.args.3".tr();
