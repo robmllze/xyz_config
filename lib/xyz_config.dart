@@ -12,4 +12,4 @@
 
 library;
 
-export 'lib.dart';
+export 'src/_all_src.g.dart';
