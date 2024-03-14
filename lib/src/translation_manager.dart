@@ -49,7 +49,8 @@ class TranslationManager {
   //
 
   Future<void> setFile(ConfigFile file) async {
-    final added = this.files.firstWhereOrNull((e) => e.fileRef == file.fileRef) != null;
+    final added =
+        this.files.firstWhereOrNull((e) => e.fileRef == file.fileRef) != null;
     if (!added) {
       this.files.add(file);
       await file.process();
