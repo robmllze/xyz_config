@@ -26,7 +26,18 @@ class ConfigFile {
   //
   //
 
-  const ConfigFile(
+  factory ConfigFile(ConfigFileRef fileRef) {
+    return ConfigFile.c(
+      fileRef,
+      Config(),
+    );
+  }
+
+  //
+  //
+  //
+
+  const ConfigFile.c(
     this.fileRef,
     this.config,
   );
@@ -61,7 +72,7 @@ class ConfigFile {
     if (src != null) {
       final data = loadYaml(src);
       if (data is YamlMap) {
-        this.config.fields = data;
+        this.config.setFields(data);
       }
     }
   }
@@ -77,7 +88,7 @@ class ConfigFile {
         src = src!.replaceAll(c, "");
       }
       final data = jsonDecode(src!);
-      this.config.fields = data;
+      this.config.setFields(data);
     }
   }
 
@@ -85,7 +96,7 @@ class ConfigFile {
     final src = await this.fileRef.read?.call();
     if (src != null) {
       final data = jsonDecode(src);
-      this.config.fields = data;
+      this.config.setFields(data);
     }
   }
 }

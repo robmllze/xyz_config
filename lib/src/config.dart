@@ -20,7 +20,7 @@ class Config {
   //
 
   final ConfigRef? ref;
-  var _fields = {};
+  final Map fields;
   final String opening;
   final String closing;
   final String separator;
@@ -30,26 +30,44 @@ class Config {
   //
   //
 
-  Config({
-    this.ref,
-    Map fields = const {},
-    this.opening = "<<<",
-    this.closing = ">>>",
-    this.separator = ".",
-    this.delimiter = "||",
+  factory Config({
+    ConfigRef? ref,
+    String opening = "<<<",
+    String closing = ">>>",
+    String separator = ".",
+    String delimiter = "||",
   }) {
-    this.fields = fields;
+    return Config.c(
+      ref: ref,
+      fields: {},
+      opening: opening,
+      closing: closing,
+      separator: separator,
+      delimiter: delimiter,
+    );
   }
 
   //
   //
   //
 
-  Map get fields => _fields;
+  const Config.c({
+    this.ref,
+    required this.fields,
+    this.opening = "<<<",
+    this.closing = ">>>",
+    this.separator = ".",
+    this.delimiter = "||",
+  });
 
-  set fields(Map value) {
+  //
+  //
+  //
+
+  void setFields(Map value) {
     var temp = recursiveReplace(value);
-    this._fields = expandJson(temp);
+    this.fields.clear();
+    this.fields.addAll(expandJson(temp));
   }
 
   //
@@ -64,7 +82,7 @@ class Config {
   }) {
     final expandedArgs = expandJson(args);
     final data = {
-      ...this._fields,
+      ...this.fields,
       ...expandedArgs,
     };
     final r = replaceAllPatterns(

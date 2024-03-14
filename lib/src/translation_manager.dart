@@ -26,23 +26,32 @@ class TranslationManager {
   //
   //
 
-  TranslationManager();
+  final List<ConfigFile> files;
 
   //
   //
   //
 
-  final _files = List<ConfigFile>.empty(growable: true);
-  List<ConfigFile> get files => _files;
+  factory TranslationManager() {
+    return TranslationManager.c(
+      List<ConfigFile>.empty(growable: true),
+    );
+  }
+
+  //
+  //
+  //
+
+  const TranslationManager.c(this.files);
 
   //
   //
   //
 
   Future<void> setFile(ConfigFile file) async {
-    final added = this._files.firstWhereOrNull((e) => e.fileRef == file.fileRef) != null;
+    final added = this.files.firstWhereOrNull((e) => e.fileRef == file.fileRef) != null;
     if (!added) {
-      this._files.add(file);
+      this.files.add(file);
       await file.process();
     }
     _translationFile = file;
