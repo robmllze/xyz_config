@@ -10,50 +10,20 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import 'package:equatable/equatable.dart';
-
 import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class ConfigFileRef extends Equatable {
-  //
-  //
-  //
-
-  final String? path;
-  final ConfigFileType type;
-  final String? alias;
-  final Future<String> Function()? read;
-
-  //
-  //
-  //
-
-  const ConfigFileRef({
-    this.path,
-    this.type = ConfigFileType.YAML,
-    this.alias,
-    this.read,
-  });
-
-  //
-  //
-  //
-
-  @override
-  List<Object?> get props {
-    return [
-      path,
-      type,
-      alias,
-    ];
+extension Cf on String {
+  String cf(
+    Config config, [
+    Map<dynamic, dynamic> args = const {},
+  ]) {
+    return config.map<String>(
+          this,
+          args: args,
+          fallback: this,
+        ) ??
+        this;
   }
-
-  //
-  //
-  //
-
-  @override
-  bool? get stringify => true;
 }

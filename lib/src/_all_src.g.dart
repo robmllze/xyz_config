@@ -7,12 +7,13 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
+export 'cf.dart';
 export 'config.dart';
 export 'config_file.dart';
 export 'config_file_ref.dart';
 export 'config_file_type.dart';
-export 'config_manager.dart';
+export 'translation_manager.dart';
 export 'config_ref.dart';
-export 'translate/locale_ref.dart';
-export 'translate/tr.dart';
+export 'locale_ref.dart';
+export 'tr.dart';
 export 'utils/parse_source_for_strings_and_comments.dart';

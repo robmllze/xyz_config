@@ -38,72 +38,54 @@ class ConfigFile {
   Future<bool> process() async {
     switch (this.fileRef.type) {
       case ConfigFileType.JSON:
-        await this.config._processFromJson();
+        await this._processJsonFile();
         break;
       case ConfigFileType.JSONC:
-        await this.config._processFromJsonc();
+        await this._processJsoncFile();
         break;
       case ConfigFileType.YAML:
-        await this.config._processFromYaml();
+        await this._processYamlFile();
         break;
       default:
         return false;
     }
     return true;
   }
-}
 
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+  //
+  //
+  //
 
-extension ProcessConfigExtension on Config {
-  // ---------------------------------------------------------------------------
-  // YAML
-  // ---------------------------------------------------------------------------
-
-  Future<void> _processFromYaml() async {
-    final src = await this.getter();
-    final yaml = loadYaml(src);
-    if (yaml is YamlMap) {
-      var temp = recursiveReplace(yaml);
-      temp = expandJson(temp);
-      this.fields
-        ..clear()
-        ..addAll(temp);
+  Future<void> _processYamlFile() async {
+    final src = await this.fileRef.read?.call();
+    if (src != null) {
+      final data = loadYaml(src);
+      if (data is YamlMap) {
+        this.config.fields = data;
+      }
     }
   }
 
-  // ---------------------------------------------------------------------------
-  // JSONC
-  // ---------------------------------------------------------------------------
-
-  Future<void> _processFromJsonc() async {
-    var src = await this.getter();
-    final result = parseSourceForStringsAndComments(src);
-    for (final c in result.multiLineComments) {
-      src = src.replaceAll(c, "");
+  Future<void> _processJsoncFile() async {
+    var src = await this.fileRef.read?.call();
+    if (src != null) {
+      final result = parseSourceForStringsAndComments(src);
+      for (final c in result.multiLineComments) {
+        src = src!.replaceAll(c, "");
+      }
+      for (final c in result.singleLineComments) {
+        src = src!.replaceAll(c, "");
+      }
+      final data = jsonDecode(src!);
+      this.config.fields = data;
     }
-    for (final c in result.singleLineComments) {
-      src = src.replaceAll(c, "");
-    }
-    final decoded = jsonDecode(src);
-    var temp = recursiveReplace(decoded);
-    temp = expandJson(temp);
-    this.fields
-      ..clear()
-      ..addAll(temp);
   }
 
-  // ---------------------------------------------------------------------------
-  // JSON
-  // ---------------------------------------------------------------------------
-
-  Future<void> _processFromJson() async {
-    final src = await this.getter();
-    final decoded = jsonDecode(src);
-    var temp = recursiveReplace(decoded);
-    temp = expandJson(temp);
-    this.fields
-      ..clear()
-      ..addAll(temp);
+  Future<void> _processJsonFile() async {
+    final src = await this.fileRef.read?.call();
+    if (src != null) {
+      final data = jsonDecode(src);
+      this.config.fields = data;
+    }
   }
 }

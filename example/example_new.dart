@@ -18,26 +18,42 @@ import 'package:xyz_config/xyz_config.dart';
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 void main() async {
-  final configManager = ConfigManager.create(
-    {
-      const ConfigRef("test"): const ConfigFileRef(
-        "test.yaml",
-        alias: "Test",
-        type: ConfigFileType.YAML,
-      ),
-    },
-    (path) => File(path).readAsString(),
-  );
+  // final configManager = ConfigManager.create(
+  //   {
+  //     const ConfigRef("test"): const ConfigFileRef(
+  //       "test.yaml",
+  //       alias: "Test",
+  //       type: ConfigFileType.YAML,
+  //     ),
+  //   },
+  //   (path) => File(path).readAsString(),
+  // );
 
-  await configManager.loadFileByPath("test.yaml");
+  // await configManager.loadFileByPath("test.yaml");
 
-  print(
-    "sadsasd <<<user.name||HELLO>>>".tr(
-      {
-        "user": {
-          "name": "Bob1",
-        },
-      },
-    ),
-  );
+  final fileRef = ConfigFileRef(read: () => File("test.yaml").readAsString());
+  final config = Config();
+  final configFile = ConfigFile(fileRef, config);
+
+  await TranslationManager().setFile(configFile);
+
+  // final config = Config(
+  //   fields: {
+  //     "user": {
+  //       "name": "Bob",
+  //     },
+  //   },
+  // );
+
+  print("Name <<<user.name||Unknown>>>".tr());
+
+  // cfile.print(
+  //   "sadsasd <<<user.name||HELLO>>>".tr(
+  //     {
+  //       "user": {
+  //         "name": "Bob1",
+  //       },
+  //     },
+  //   ),
+  // );
 }

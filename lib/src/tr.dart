@@ -14,11 +14,11 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-extension TrOnStringExtension on String {
+extension Tr on String {
   String tr([
     Map<dynamic, dynamic> args = const {},
   ]) {
-    return ConfigManager.translationManager!.map<String>(
+    return TranslationManager.translationFile.config.map<String>(
           this,
           args: args,
           fallback: this,

@@ -19,8 +19,8 @@ class Config {
   //
   //
 
-  final ConfigRef configRef;
-  final Future<String> Function() getter;
+  final ConfigRef? ref;
+  var _fields = {};
   final String opening;
   final String closing;
   final String separator;
@@ -30,40 +30,52 @@ class Config {
   //
   //
 
-  Config._(
-    this.configRef,
-    this.getter,
-    this.opening,
-    this.closing,
-    this.separator,
-    this.delimiter,
-  );
-
-  //
-  //
-  //
-
-  final Map<dynamic, dynamic> fields = {};
-
-  //
-  //
-  //
-
-  factory Config(
-    ConfigRef configRef,
-    Future<String> Function() getter, {
-    String opening = "<<<",
-    String closing = ">>>",
-    String separator = ".",
-    String delimiter = "||",
+  Config({
+    this.ref,
+    Map fields = const {},
+    this.opening = "<<<",
+    this.closing = ">>>",
+    this.separator = ".",
+    this.delimiter = "||",
   }) {
-    return Config._(
-      configRef,
-      getter,
-      opening,
-      closing,
-      separator,
-      delimiter,
+    this.fields = fields;
+  }
+
+  //
+  //
+  //
+
+  Map get fields => _fields;
+
+  set fields(Map value) {
+    var temp = recursiveReplace(value);
+    this._fields = expandJson(temp);
+  }
+
+  //
+  //
+  //
+
+  T? map<T>(
+    String input, {
+    Map<dynamic, dynamic> args = const {},
+    T? fallback,
+    String? Function(String, dynamic, String?)? onReplace,
+  }) {
+    final expandedArgs = expandJson(args);
+    final data = {
+      ...this._fields,
+      ...expandedArgs,
+    };
+    final r = replaceAllPatterns(
+      input,
+      data,
+      opening: this.opening,
+      closing: this.closing,
+      delimiter: this.delimiter,
+      onReplace: onReplace,
     );
+    final res = let<T>(r) ?? fallback;
+    return res;
   }
 }

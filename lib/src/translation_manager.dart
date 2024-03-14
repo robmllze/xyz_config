@@ -10,50 +10,41 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import 'package:equatable/equatable.dart';
-
 import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class ConfigFileRef extends Equatable {
+class TranslationManager {
   //
   //
   //
 
-  final String? path;
-  final ConfigFileType type;
-  final String? alias;
-  final Future<String> Function()? read;
+  static ConfigFile? _translationFile;
+  static ConfigFile get translationFile => _translationFile!;
 
   //
   //
   //
 
-  const ConfigFileRef({
-    this.path,
-    this.type = ConfigFileType.YAML,
-    this.alias,
-    this.read,
-  });
+  TranslationManager();
 
   //
   //
   //
 
-  @override
-  List<Object?> get props {
-    return [
-      path,
-      type,
-      alias,
-    ];
+  final _files = List<ConfigFile>.empty(growable: true);
+  List<ConfigFile> get files => _files;
+
+  //
+  //
+  //
+
+  Future<void> setFile(ConfigFile file) async {
+    final added = this._files.firstWhereOrNull((e) => e.fileRef == file.fileRef) != null;
+    if (!added) {
+      this._files.add(file);
+      await file.process();
+    }
+    _translationFile = file;
   }
-
-  //
-  //
-  //
-
-  @override
-  bool? get stringify => true;
 }
