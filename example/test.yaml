@@ -10,6 +10,7 @@
 ## ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 ##.title~
 
+name: Dude
 message: "Testing 123..."
 number: 4
 funny: "I do not like number (=.number)"
@@ -18,4 +19,5 @@ user:
   age: 42
   surname: McFlurry
   middle-names: [Frank, Gerhard]
+  test-phrase: "My name is <<<name>>> <<<surname>>>. I am <<<age>>> years old and my favorite sport is <<<sport>"
   phrase: My name is (=.name) (=.surname). I am (=.age) years old and my favorite sport is (=sport).

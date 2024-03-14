@@ -10,7 +10,7 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-part of 'config.dart';
+import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -20,19 +20,17 @@ class ConfigManager {
   //
 
   static ConfigManager? _translationManager;
-
-  void selectAsTranslationManager() {
-    _translationManager = this;
-  }
+  static ConfigManager? get translationManager => _translationManager;
 
   //
   //
   //
 
-  ConfigFile? _selected;
-  ConfigFile? get selectedFile => this._selected;
   final Set<ConfigFile> files;
-  final String opening, closing, delimiter;
+  final String opening;
+  final String closing;
+  final String separator;
+  final String delimiter;
 
   //
   //
@@ -42,11 +40,27 @@ class ConfigManager {
     this.files,
     this.opening,
     this.closing,
+    this.separator,
     this.delimiter,
   ) {
     assert(files.isNotEmpty);
-    this._selected = files.first;
+    this._selectedFile = files.first;
     _translationManager ??= this;
+  }
+
+  //
+  //
+  //
+
+  ConfigFile? _selectedFile;
+  ConfigFile? get selectedFile => this._selectedFile;
+
+  //
+  //
+  //
+
+  void selectAsTranslationManager() {
+    _translationManager = this;
   }
 
   //
@@ -68,6 +82,7 @@ class ConfigManager {
     Future<String> Function(String path) reader, {
     String opening = "<<<",
     String closing = ">>>",
+    String separator = ".",
     String delimiter = "||",
   }) {
     final configs = <ConfigFile>{};
@@ -81,6 +96,7 @@ class ConfigManager {
         () => reader(path),
         opening: opening,
         closing: closing,
+        separator: separator,
         delimiter: delimiter,
       );
       configs.add(ConfigFile(fileRef, config));
@@ -89,6 +105,7 @@ class ConfigManager {
       configs,
       opening,
       closing,
+      separator,
       delimiter,
     );
   }
@@ -108,8 +125,8 @@ class ConfigManager {
     final g = this.getByPath(path);
     assert(g != null);
     if (g != null) {
-      this._selected = g;
-      return this._selected;
+      this._selectedFile = g;
+      return this._selectedFile;
     }
     return null;
   }
@@ -139,8 +156,8 @@ class ConfigManager {
     final g = this.getByConfigRef(configRef);
     assert(g != null);
     if (g != null) {
-      this._selected = g;
-      return this._selected;
+      this._selectedFile = g;
+      return this._selectedFile;
     }
     return null;
   }
@@ -162,6 +179,34 @@ class ConfigManager {
       final ref = l.config.configRef;
       return ref is LocaleRef ? ref : null;
     }).nonNulls;
+  }
+
+  //
+  //
+  //
+
+  T? map<T>(
+    String input, {
+    Map<dynamic, dynamic> args = const {},
+    T? fallback,
+    String? Function(String, dynamic, String?)? onReplace,
+  }) {
+    final fields = this.selectedFile?.config.fields;
+    final expandedArgs = expandJson(args);
+    final data = {
+      ...?fields,
+      ...expandedArgs,
+    };
+    final r = replaceAllPatterns(
+      input,
+      data,
+      opening: this.opening,
+      closing: this.closing,
+      delimiter: this.delimiter,
+      onReplace: onReplace,
+    );
+    final res = let<T>(r) ?? fallback;
+    return res;
   }
 }
 

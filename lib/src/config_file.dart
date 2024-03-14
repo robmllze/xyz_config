@@ -10,7 +10,7 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-part of 'config.dart';
+import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -55,30 +55,55 @@ class ConfigFile {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class ConfigFileRef {
-  //
-  //
-  //
+extension ProcessConfigExtension on Config {
+  // ---------------------------------------------------------------------------
+  // YAML
+  // ---------------------------------------------------------------------------
 
-  final String path;
-  final ConfigFileType type;
-  final String? alias;
+  Future<void> _processFromYaml() async {
+    final src = await this.getter();
+    final yaml = loadYaml(src);
+    if (yaml is YamlMap) {
+      var temp = recursiveReplace(yaml);
+      temp = expandJson(temp);
+      this.fields
+        ..clear()
+        ..addAll(temp);
+    }
+  }
 
-  //
-  //
-  //
+  // ---------------------------------------------------------------------------
+  // JSONC
+  // ---------------------------------------------------------------------------
 
-  const ConfigFileRef(
-    this.path, {
-    this.type = ConfigFileType.YAML,
-    this.alias,
-  });
-}
+  Future<void> _processFromJsonc() async {
+    var src = await this.getter();
+    final result = parseSourceForStringsAndComments(src);
+    for (final c in result.multiLineComments) {
+      src = src.replaceAll(c, "");
+    }
+    for (final c in result.singleLineComments) {
+      src = src.replaceAll(c, "");
+    }
+    final decoded = jsonDecode(src);
+    var temp = recursiveReplace(decoded);
+    temp = expandJson(temp);
+    this.fields
+      ..clear()
+      ..addAll(temp);
+  }
 
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+  // ---------------------------------------------------------------------------
+  // JSON
+  // ---------------------------------------------------------------------------
 
-enum ConfigFileType {
-  JSON,
-  JSONC,
-  YAML,
+  Future<void> _processFromJson() async {
+    final src = await this.getter();
+    final decoded = jsonDecode(src);
+    var temp = recursiveReplace(decoded);
+    temp = expandJson(temp);
+    this.fields
+      ..clear()
+      ..addAll(temp);
+  }
 }

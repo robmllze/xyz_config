@@ -10,7 +10,7 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import 'config_ref.dart';
+import '../config_ref.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -42,7 +42,7 @@ class LocaleRef extends ConfigRef {
   /// Creates a new [LocaleRef] from a [localeCode].
   factory LocaleRef.fromCode(String localeCode) {
     final parts = localeCode.split("_");
-    if (parts.length >= 2) {
+    if (parts.length == 2) {
       final languageCode = parts[0];
       final countryCode = parts[1];
       return LocaleRef(languageCode, countryCode);
@@ -54,17 +54,17 @@ class LocaleRef extends ConfigRef {
   //
   //
 
-  String get localeCode => super.refCode;
-}
-
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
-/// Returns a [LocaleRef] from a [localeCode], or null if the [localeCode] is
-/// badly formatted.
-LocaleRef? localeCodeToRef(String localeCode) {
-  final parts = localeCode.split("_");
-  if (parts.length == 2) {
-    return LocaleRef(parts[0], parts[1]);
+  static LocaleRef? tryFromCode(String localeCode) {
+    final parts = localeCode.split("_");
+    if (parts.length == 2) {
+      return LocaleRef(parts[0], parts[1]);
+    }
+    return null;
   }
-  return null;
+
+  //
+  //
+  //
+
+  String get localeCode => super.refCode;
 }

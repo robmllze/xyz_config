@@ -26,8 +26,8 @@ dependencies:
 
   http:
 
-  xyz_utils: any
+  xyz_utils: ^0.43.0
   
   xyz_config:
-    path: ../
+    path: ../../xyz_config
   

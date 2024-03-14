@@ -10,34 +10,60 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import 'dart:io';
-
-import 'package:xyz_config/_common.dart';
-import 'package:xyz_config/xyz_config.dart';
+import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-void main() async {
-  final configManager = ConfigManager.create(
-    {
-      const ConfigRef("test"): const ConfigFileRef(
-        "test.yaml",
-        alias: "Test",
-        type: ConfigFileType.YAML,
-      ),
-    },
-    (path) => File(path).readAsString(),
+class Config {
+  //
+  //
+  //
+
+  final ConfigRef configRef;
+  final Future<String> Function() getter;
+  final String opening;
+  final String closing;
+  final String separator;
+  final String delimiter;
+
+  //
+  //
+  //
+
+  Config._(
+    this.configRef,
+    this.getter,
+    this.opening,
+    this.closing,
+    this.separator,
+    this.delimiter,
   );
 
-  await configManager.loadFileByPath("test.yaml");
+  //
+  //
+  //
 
-  print(
-    "sadsasd <<<user.name||HELLO>>>".tr(
-      {
-        "user": {
-          "name": "Bob1",
-        },
-      },
-    ),
-  );
+  final Map<dynamic, dynamic> fields = {};
+
+  //
+  //
+  //
+
+  factory Config(
+    ConfigRef configRef,
+    Future<String> Function() getter, {
+    String opening = "<<<",
+    String closing = ">>>",
+    String separator = ".",
+    String delimiter = "||",
+  }) {
+    return Config._(
+      configRef,
+      getter,
+      opening,
+      closing,
+      separator,
+      delimiter,
+    );
+  }
 }
