@@ -87,7 +87,11 @@ class Config<TConfigRef extends ConfigRef> extends Equatable {
       ...this.fields,
       ...expandedArgs,
     };
-    var input = _addOpeningAndClosing(value, opening: this.opening, closing: this.closing);
+    var input = _addOpeningAndClosing(
+      value,
+      opening: this.opening,
+      closing: this.closing,
+    );
     if (!caseSensitive) {
       data = data.map((k, v) => MapEntry(k.toString().toLowerCase(), v));
       input = input = caseSensitive ? value : value.toLowerCase();

@@ -22,7 +22,9 @@ void main() async {
 
   // [Step 2] Create a translations reader that reads YAML files.
   final yamlReader = TranslationsFileReader(
-    translationsDirPath: ["translations"], // Optional, defaults to ["translations"].
+    translationsDirPath: [
+      "translations",
+    ], // Optional, defaults to ["translations"].
     fileReader: fileReader,
     fileType: ConfigFileType.YAML, // Optional, defaults to YAML.
   );
@@ -42,11 +44,19 @@ void main() async {
   // <<<>>> syntax to include the translated string in a larger string.
   print("message.helloworld".tr()); // prints "Hello World!"
   print("message.helloworld||Hi there world!".tr()); // prints "Hello World!"
-  print("message.doesntexist||Hi there world!".tr()); // prints "Hi there world!"
-  print("<<<message.helloworld>>> is the message!".tr()); // prints "Hello World! is the message!"
-  print("Message: <<<message.helloworld||Hello!>>>".tr()); // prints "Message: Hello World!"
+  print(
+    "message.doesntexist||Hi there world!".tr(),
+  ); // prints "Hi there world!"
+  print(
+    "<<<message.helloworld>>> is the message!".tr(),
+  ); // prints "Hello World! is the message!"
+  print(
+    "Message: <<<message.helloworld||Hello!>>>".tr(),
+  ); // prints "Message: Hello World!"
 
-  print("Locales.descriptions.${SampleLocale.ENGLISH_US.localeCode}".tr()); // prints "English (US)
+  print(
+    "Locales.descriptions.${SampleLocale.ENGLISH_US.localeCode}".tr(),
+  ); // prints "English (US)
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░

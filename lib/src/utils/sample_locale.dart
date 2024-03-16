@@ -159,7 +159,8 @@ enum SampleLocale with LocaleEnumMixin {
   LocaleRef get localeRef => LocaleRef.fromCode(this.localeCode);
 
   @override
-  String get localeDescription => "${this._defaultDescription}||Locales.${this.name}".tr();
+  String get localeDescription =>
+      "${this._defaultDescription}||Locales.${this.name}".tr();
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
