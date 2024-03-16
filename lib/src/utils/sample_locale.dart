@@ -1,12 +1,12 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// X|Y|Z & Dev 
+// X|Y|Z & Dev
 //
 // Copyright Ⓒ Robert Mollentze, xyzand.dev
-// 
+//
 // Licensing details can be found in the LICENSE file in the root directory.
-// 
+//
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
@@ -159,20 +159,20 @@ enum SampleLocale with LocaleEnumMixin {
   LocaleRef get localeRef => LocaleRef.fromCode(this.localeCode);
 
   @override
-  String get description => "${this._defaultDescription}||Locales.${this.name}".tr();
+  String get localeDescription => "${this._defaultDescription}||Locales.${this.name}".tr();
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 /// A mixin for an enum that represents a locale such as [SampleLocale] to
-/// provide [localeCode], [localeRef] and [description].
-mixin LocaleEnumMixin {
+/// provide [localeCode], [localeRef] and [localeDescription].
+mixin LocaleEnumMixin<TConfigRef extends ConfigRef> {
   /// The locale code, such as "en_US".
   String get localeCode;
 
   /// The reference to this locale.
-  ConfigRef get localeRef;
+  TConfigRef get localeRef;
 
   /// The description of this locale.
-  String get description;
+  String get localeDescription;
 }

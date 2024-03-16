@@ -76,22 +76,24 @@ class Config<TConfigRef extends ConfigRef> extends Equatable {
 
   /// Maps a string to a value using this config.
   T? map<T>(
-    String input, {
+    String value, {
     Map<dynamic, dynamic> args = const {},
     T? fallback,
     String? Function(String, dynamic, String?)? callback,
+    bool caseSensitive = true,
   }) {
     final expandedArgs = expandJson(args);
-    final data = {
+    var data = {
       ...this.fields,
       ...expandedArgs,
     };
+    var input = _addOpeningAndClosing(value, opening: this.opening, closing: this.closing);
+    if (!caseSensitive) {
+      data = data.map((k, v) => MapEntry(k.toString().toLowerCase(), v));
+      input = input = caseSensitive ? value : value.toLowerCase();
+    }
     final r = replaceAllPatterns(
-      _addOpeningAndClosing(
-        input,
-        opening: this.opening,
-        closing: this.closing,
-      ),
+      input,
       data,
       opening: this.opening,
       closing: this.closing,
