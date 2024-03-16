@@ -1,48 +1,41 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// X|Y|Z & Dev
+// X|Y|Z & Dev 
 //
 // Copyright Ⓒ Robert Mollentze, xyzand.dev
-//
+// 
 // Licensing details can be found in the LICENSE file in the root directory.
-//
+// 
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-class ConfigRef<T> {
+import 'package:equatable/equatable.dart';
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+/// A reference to a config element.
+class ConfigRef<TRef, TType> extends Equatable {
   //
   //
   //
 
-  final T refCode;
+  /// The value of this reference.
+  final TRef? ref;
 
-  //
-  //
-  //
-
-  const ConfigRef(this.refCode);
-
-  //
-  //
-  //
-
-  @override
-  String toString() => this.refCode.toString();
+  /// The type of this reference.
+  final TType? type;
 
   //
   //
   //
 
-  @override
-  bool operator ==(final other) {
-    return other is ConfigRef && other.hashCode == this.hashCode;
-  }
+  const ConfigRef({this.ref, this.type});
 
   //
   //
   //
 
   @override
-  int get hashCode => this.refCode.hashCode;
+  List<Object?> get props => [this.ref, this.type];
 }

@@ -1,12 +1,12 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// X|Y|Z & Dev
+// X|Y|Z & Dev 
 //
 // Copyright Ⓒ Robert Mollentze, xyzand.dev
-//
+// 
 // Licensing details can be found in the LICENSE file in the root directory.
-//
+// 
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
@@ -14,47 +14,23 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class TranslationManager {
+/// A manager for config files.
+class FileConfigManager extends ConfigManager {
   //
   //
   //
 
-  static ConfigFile? _translationFile;
-  static ConfigFile get translationFile => _translationFile!;
-
-  //
-  //
-  //
-
-  final List<ConfigFile> files;
+  FileConfigManager() : super({});
 
   //
   //
   //
 
-  factory TranslationManager() {
-    return TranslationManager.c(
-      List<ConfigFile>.empty(growable: true),
-    );
-  }
-
-  //
-  //
-  //
-
-  const TranslationManager.c(this.files);
-
-  //
-  //
-  //
-
-  Future<void> setFile(ConfigFile file) async {
-    final added =
-        this.files.firstWhereOrNull((e) => e.fileRef == file.fileRef) != null;
+  Future<void> setFileConfig(FileConfig fileConfig) async {
+    final added = this.configs.firstWhereOrNull((e) => e.ref == fileConfig.ref) != null;
     if (!added) {
-      this.files.add(file);
-      await file.process();
+      this.configs.add(fileConfig);
+      await fileConfig.readAssociatedFile();
     }
-    _translationFile = file;
   }
 }

@@ -1,12 +1,12 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// X|Y|Z & Dev
+// X|Y|Z & Dev 
 //
 // Copyright Ⓒ Robert Mollentze, xyzand.dev
-//
+// 
 // Licensing details can be found in the LICENSE file in the root directory.
-//
+// 
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
@@ -14,16 +14,22 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-extension Cf on String {
-  String cf(
-    Config config, [
-    Map<dynamic, dynamic> args = const {},
-  ]) {
-    return config.map<String>(
-          this,
-          args: args,
-          fallback: this,
-        ) ??
-        this;
-  }
+/// A reference to a config file.
+class ConfigFileRef extends ConfigRef<String, ConfigFileType> {
+  //
+  //
+  //
+
+  /// A function to read the config file.
+  final Future<String> Function()? read;
+
+  //
+  //
+  //
+
+  const ConfigFileRef({
+    super.ref,
+    super.type = ConfigFileType.YAML,
+    this.read,
+  });
 }

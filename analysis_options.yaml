@@ -38,4 +38,3 @@ analyzer:
     prefer_final_in_for_each: error
     unnecessary_new: error
     unrelated_type_equality_checks: error
-    
