@@ -1,9 +1,25 @@
+##.title
+## ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+##
+## X|Y|Z & Dev
+##
+## Copyright Ⓒ Robert Mollentze, xyzand.dev
+## 
+## Licensing details can be found in the LICENSE file in the root directory.
+## 
+## ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+##.title~
+
 name: Create Release from Release Branch
+
+## -----------------------------------------------------------------------------
 
 on:
   push:
     branches:
       - release
+
+## -----------------------------------------------------------------------------
 
 jobs:
   create-release:
@@ -29,13 +45,14 @@ jobs:
       - name: Get all commit messages since last tag
         id: get_commit_messages
         run: |
-          # Get the latest tag name
-          LATEST_TAG=$(git describe --tags --abbrev=0)
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "NO_TAG_FOUND")
           echo "Latest tag: $LATEST_TAG"
-          
-          # Get commit messages from last tag to HEAD
-          COMMIT_MESSAGES=$(git log $LATEST_TAG..HEAD --pretty=format:"%s")
-          echo "::set-output name=messages::${COMMIT_MESSAGES}"
+          if [ "$LATEST_TAG" = "NO_TAG_FOUND" ]; then
+            COMMIT_MESSAGES=$(git log --pretty=format:"%s")
+          else
+            COMMIT_MESSAGES=$(git log $LATEST_TAG..HEAD --pretty=format:"%s")
+          fi
+          echo "::set-output name=messages::$COMMIT_MESSAGES"
           echo "Commit messages since last tag: $COMMIT_MESSAGES"
 
       - name: Create Tag and Release
