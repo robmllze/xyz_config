@@ -42,25 +42,20 @@ jobs:
           echo "::set-output name=version::$VERSION"
           echo "Version: $VERSION"
 
-      - name: Get all commit messages since last tag
-        id: get_commit_messages
+      - name: Extract release notes from CHANGELOG.md
+        id: get_release_notes
         run: |
-          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "NO_TAG_FOUND")
-          echo "Latest tag: $LATEST_TAG"
-          if [ "$LATEST_TAG" = "NO_TAG_FOUND" ]; then
-            COMMIT_MESSAGES=$(git log --pretty=format:"%s")
-          else
-            COMMIT_MESSAGES=$(git log $LATEST_TAG..HEAD --pretty=format:"%s")
-          fi
-          echo "::set-output name=messages::$COMMIT_MESSAGES"
-          echo "Commit messages since last tag: $COMMIT_MESSAGES"
+          VERSION=${{ steps.get_version.outputs.version }}
+          RELEASE_NOTES=$(awk -v version="$VERSION" 'BEGIN {print_flag=0;} /## \['version'\]/ {print_flag=1; next} /## \[/ {print_flag=0} print_flag {print}' CHANGELOG.md)
+          echo "Release notes for version $VERSION: $RELEASE_NOTES"
+          echo "::set-output name=release-notes::$(echo "$RELEASE_NOTES" | sed ':a;N;$!ba;s/\n/%0A/g')"
 
       - name: Create Tag and Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           VERSION=${{ steps.get_version.outputs.version }}
-          COMMIT_MESSAGES=${{ steps.get_commit_messages.outputs.messages }}
+          RELEASE_NOTES=${{ steps.get_release_notes.outputs.release-notes }}
           echo "Creating tag and release for version $VERSION"
           
           # Create Git tag
@@ -72,5 +67,6 @@ jobs:
           # Create GitHub Release
           gh release create $VERSION \
             --title "Release $VERSION" \
-            --notes "$COMMIT_MESSAGES" \
+            --notes "$RELEASE_NOTES" \
             --draft
+
