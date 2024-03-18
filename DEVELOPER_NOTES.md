@@ -10,7 +10,7 @@
 1. Update the version number in `CHANGELOG.md`.
 1. Run `dart pub publish --dry-run` to check for errors.
 1. Run `dart pub publish` to publish the package.
----
+
 ## macOS and Linux
 
 ### Fetching Generators
@@ -26,8 +26,10 @@ rm -rf .github/ && git clone https://github.com/robmllze/pub.dev_package_workflo
 cd your/project/path
 find . -name '.DS_Store' -type f -delete
 ```
----
+
 ## Windows
+
+### Fetching Generators
 ```bash
 rmdir /s /q ___generators/ && git clone https://github.com/robmllze/___generators.git && dart pub get && rmdir /s /q ___generators/
 ```
