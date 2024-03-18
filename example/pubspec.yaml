@@ -17,7 +17,6 @@ name: xyz_config_example
 environment:
 
   sdk: '>= 3.0.0 < 4.0.0'
-  flutter: '>= 3.0.0 < 4.0.0'
 
 ## -----------------------------------------------------------------------------
 
@@ -25,7 +24,6 @@ dependencies:
 
   http:
 
-  xyz_utils: ^0.44.4
+  xyz_utils: any
   
-  xyz_config:
-    path: ../../xyz_config
+  xyz_config: any
