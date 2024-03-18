@@ -8,6 +8,6 @@
 
 - Initial release.
 
-## [0.15.0]
+## [0.15.1]
 
 - Current release.
