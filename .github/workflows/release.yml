@@ -1,0 +1,59 @@
+name: Create Release from Release Branch
+
+on:
+  push:
+    branches:
+      - release
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          # Fetch the full git history so tags are included
+          fetch-depth: 0
+
+      - name: Set up Dart
+        uses: dart-lang/setup-dart@v1.2
+
+      - name: Extract version from pubspec.yaml
+        id: get_version
+        run: |
+          echo "Extracting version from pubspec.yaml..."
+          VERSION=$(grep 'version:' pubspec.yaml | sed 's/version: //')
+          echo "::set-output name=version::$VERSION"
+          echo "Version: $VERSION"
+
+      - name: Get all commit messages since last tag
+        id: get_commit_messages
+        run: |
+          # Get the latest tag name
+          LATEST_TAG=$(git describe --tags --abbrev=0)
+          echo "Latest tag: $LATEST_TAG"
+          
+          # Get commit messages from last tag to HEAD
+          COMMIT_MESSAGES=$(git log $LATEST_TAG..HEAD --pretty=format:"%s")
+          echo "::set-output name=messages::${COMMIT_MESSAGES}"
+          echo "Commit messages since last tag: $COMMIT_MESSAGES"
+
+      - name: Create Tag and Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION=${{ steps.get_version.outputs.version }}
+          COMMIT_MESSAGES=${{ steps.get_commit_messages.outputs.messages }}
+          echo "Creating tag and release for version $VERSION"
+          
+          # Create Git tag
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          git tag $VERSION
+          git push origin $VERSION
+          
+          # Create GitHub Release
+          gh release create $VERSION \
+            --title "Release $VERSION" \
+            --notes "$COMMIT_MESSAGES" \
+            --draft

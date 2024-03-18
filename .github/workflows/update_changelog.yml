@@ -25,19 +25,22 @@ jobs:
       - name: Get commit messages
         id: get_commits
         run: |
-          # Get the commit messages since the last commit on main before this push
-          # Adjust the range as needed (e.g., HEAD~1 for the last commit only)
           COMMIT_MESSAGES=$(git log --format=%B -n 1 HEAD)
           echo "::set-output name=messages::${COMMIT_MESSAGES}"
       
+      - name: Get current date
+        id: get_date
+        run: echo "::set-output name=today::$(date +'%Y-%m-%d')"
+      
       - name: Update CHANGELOG.md
         run: |
-          dart run .github/scripts/update_changelog.dart "${{ steps.get_version.outputs.extracted_version }}" "${{ steps.get_commits.outputs.messages }}"
+          RELEASE_NOTES="- Date: ${{ steps.get_date.outputs.today }}\n- ${{ steps.get_commits.outputs.messages }}"
+          dart run .github/scripts/update_changelog.dart "${{ steps.get_version.outputs.extracted_version }}" "$RELEASE_NOTES"
       
       - name: Commit and Push Changes
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add CHANGELOG.md
-          git commit -m "Update CHANGELOG.md for version ${{ steps.get_version.outputs.extracted_version }}"
+          git commit -m "Automatically update CHANGELOG.md for version ${{ steps.get_version.outputs.extracted_version }}"
           git push
