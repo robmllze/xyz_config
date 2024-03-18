@@ -48,9 +48,10 @@ jobs:
         env:
           VERSION: ${{ needs.prepare.outputs.version }}
           RELEASE_NOTES: ${{ needs.prepare.outputs.release-notes }}
-        run: dart run path/to/update_changelog.dart "$VERSION" "$RELEASE_NOTES"
+        run: dart run ./update_changelog.dart "$VERSION" "$RELEASE_NOTES"
 
   publish:
+    needs: update_changelog
     permissions:
       id-token: write # Required for authentication using OIDC
     uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
