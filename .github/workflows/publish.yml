@@ -40,6 +40,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          ref: main
       
       - name: Set up Dart
         uses: dart-lang/setup-dart@v1.2
@@ -55,10 +57,10 @@ jobs:
         run: |
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
-          git checkout main
           git add CHANGELOG.md
           git commit -m "Update CHANGELOG.md for version ${{ needs.prepare.outputs.version }}"
           git push origin main
+
 
   publish:
     needs: update_changelog
