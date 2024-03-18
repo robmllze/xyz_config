@@ -10,11 +10,21 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-export 'dart:convert';
+import '/_common.dart';
 
-export 'package:meta/meta.dart';
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-export 'package:yaml/yaml.dart';
-export 'package:xyz_utils/web_friendly.dart';
-
-export 'src/_all_src.g.dart';
+extension TrOnStringExtension on String {
+  /// Translates the string using the active translation file.
+  String tr([
+    Map<dynamic, dynamic> args = const {},
+  ]) {
+    return TranslationManager.translationFileConfig?.map<String>(
+          this,
+          args: args,
+          fallback: this,
+          caseSensitive: false,
+        ) ??
+        this;
+  }
+}

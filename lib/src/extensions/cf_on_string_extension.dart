@@ -10,11 +10,19 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-export 'dart:convert';
+import '/_common.dart';
 
-export 'package:meta/meta.dart';
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-export 'package:yaml/yaml.dart';
-export 'package:xyz_utils/web_friendly.dart';
-
-export 'src/_all_src.g.dart';
+extension CfOnStringExtension on String {
+  /// Maps the string to using the active config file.
+  T? cf<T>(
+    Config config, [
+    Map<dynamic, dynamic> args = const {},
+  ]) {
+    return config.map<T>(
+      this,
+      args: args,
+    );
+  }
+}

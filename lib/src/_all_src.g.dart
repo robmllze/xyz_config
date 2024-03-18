@@ -7,11 +7,17 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-export 'src/all_src.g.dart';
-export 'src/config/config.dart';
-export 'src/config_ref.dart';
-export 'src/generate_jmap.dart';
-export 'src/locale_ref.dart';
-export 'src/parse_source_for_strings_and_comments.dart';
-export 'src/split_by_last_occurence_of.dart';
-export 'xyz_config.dart';
+export 'configs/config.dart';
+export 'configs/file_config.dart';
+export 'extensions/cf_on_string_extension.dart';
+export 'extensions/tr_on_string_extension.dart';
+export 'managers/config_manager.dart';
+export 'managers/file_config_manager.dart';
+export 'managers/translation_manager.dart';
+export 'refs/config_file_ref.dart';
+export 'refs/config_ref.dart';
+export 'refs/locale_ref.dart';
+export 'utils/config_file_type.dart';
+export 'utils/parse_source_for_strings_and_comments.dart';
+export 'utils/sample_locale.dart';
+export 'utils/translations_file_reader.dart';

@@ -1,7 +1,11 @@
 ##.title
 ## ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+##
+## X|Y|Z & Dev
+##
+## Copyright Ⓒ Robert Mollentze, xyzand.dev
 ## 
-##  XYZ Config
+## Licensing details can be found in the LICENSE file in the root directory.
 ## 
 ## ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 ##.title~
@@ -34,4 +38,3 @@ analyzer:
     prefer_final_in_for_each: error
     unnecessary_new: error
     unrelated_type_equality_checks: error
-    

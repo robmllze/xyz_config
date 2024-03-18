@@ -10,11 +10,32 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-export 'dart:convert';
+import 'package:equatable/equatable.dart';
 
-export 'package:meta/meta.dart';
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-export 'package:yaml/yaml.dart';
-export 'package:xyz_utils/web_friendly.dart';
+/// A reference to a config element.
+class ConfigRef<TRef, TType> extends Equatable {
+  //
+  //
+  //
 
-export 'src/_all_src.g.dart';
+  /// The value of this reference.
+  final TRef? ref;
+
+  /// The type of this reference.
+  final TType? type;
+
+  //
+  //
+  //
+
+  const ConfigRef({this.ref, this.type});
+
+  //
+  //
+  //
+
+  @override
+  List<Object?> get props => [this.ref, this.type];
+}

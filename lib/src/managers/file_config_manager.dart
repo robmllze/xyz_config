@@ -1,38 +1,37 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// XYZ Config
+// X|Y|Z & Dev
+//
+// Copyright Ⓒ Robert Mollentze, xyzand.dev
+//
+// Licensing details can be found in the LICENSE file in the root directory.
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import 'dart:io';
-
-import 'package:xyz_config/xyz_config.dart';
+import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-void main() async {
-  final configManager = ConfigManager.create(
-    {
-      const ConfigRef("test"): const ConfigFileRef(
-        "test.yaml",
-        alias: "Test",
-        type: ConfigFileType.YAML,
-      ),
-    },
-    (path) => File(path).readAsString(),
-  );
+/// A manager for config files.
+class FileConfigManager extends ConfigManager {
+  //
+  //
+  //
 
-  await configManager.loadFileByPath("test.yaml");
+  FileConfigManager() : super({});
 
-  print(
-    "Hello how are you <<<users.name>>>?".tr(
-      {
-        "users": {
-          "name": "Bob1",
-        },
-      },
-    ),
-  );
+  //
+  //
+  //
+
+  Future<void> setFileConfig(FileConfig fileConfig) async {
+    final added =
+        this.configs.firstWhereOrNull((e) => e.ref == fileConfig.ref) != null;
+    if (!added) {
+      this.configs.add(fileConfig);
+      await fileConfig.readAssociatedFile();
+    }
+  }
 }

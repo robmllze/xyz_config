@@ -10,11 +10,26 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-export 'dart:convert';
+import '/_common.dart';
 
-export 'package:meta/meta.dart';
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-export 'package:yaml/yaml.dart';
-export 'package:xyz_utils/web_friendly.dart';
+/// A reference to a config file.
+class ConfigFileRef extends ConfigRef<String, ConfigFileType> {
+  //
+  //
+  //
 
-export 'src/_all_src.g.dart';
+  /// A function to read the config file.
+  final Future<String> Function()? read;
+
+  //
+  //
+  //
+
+  const ConfigFileRef({
+    super.ref,
+    super.type = ConfigFileType.YAML,
+    this.read,
+  });
+}

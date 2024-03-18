@@ -1,16 +1,21 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// XYZ Config
+// X|Y|Z & Dev
+//
+// Copyright Ⓒ Robert Mollentze, xyzand.dev
+//
+// Licensing details can be found in the LICENSE file in the root directory.
 //
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import 'config_ref.dart';
+import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class LocaleRef extends ConfigRef {
+/// A reference to a locale, such as Australian English.
+class LocaleRef extends ConfigRef<String, Type> {
   //
   //
   //
@@ -29,7 +34,10 @@ class LocaleRef extends ConfigRef {
   LocaleRef(
     this.languageCode,
     this.countryCode,
-  ) : super("${languageCode}_$countryCode".toLowerCase());
+  ) : super(
+          ref: "${languageCode.toLowerCase()}_${countryCode.toUpperCase()}",
+          type: LocaleRef,
+        );
 
   //
   //
@@ -38,29 +46,29 @@ class LocaleRef extends ConfigRef {
   /// Creates a new [LocaleRef] from a [localeCode].
   factory LocaleRef.fromCode(String localeCode) {
     final parts = localeCode.split("_");
-    if (parts.length >= 2) {
+    if (parts.length == 2) {
       final languageCode = parts[0];
       final countryCode = parts[1];
       return LocaleRef(languageCode, countryCode);
     }
-    return LocaleRef("en", "us");
+    return SampleLocale.ENGLISH_US.localeRef;
   }
 
   //
   //
   //
 
-  String get localeCode => super.refCode;
-}
-
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
-/// Returns a [LocaleRef] from a [localeCode], or null if the [localeCode] is
-/// badly formatted.
-LocaleRef? localeCodeToRef(String localeCode) {
-  final parts = localeCode.split("_");
-  if (parts.length == 2) {
-    return LocaleRef(parts[0], parts[1]);
+  static LocaleRef? tryFromCode(String localeCode) {
+    final parts = localeCode.split("_");
+    if (parts.length == 2) {
+      return LocaleRef(parts[0], parts[1]);
+    }
+    return null;
   }
-  return null;
+
+  //
+  //
+  //
+
+  String get localeCode => super.ref!;
 }

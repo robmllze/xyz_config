@@ -1,7 +1,11 @@
 ##.title
 ## ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+##
+## X|Y|Z & Dev
+##
+## Copyright Ⓒ Robert Mollentze, xyzand.dev
 ## 
-##  XYZ Config - Example
+## Licensing details can be found in the LICENSE file in the root directory.
 ## 
 ## ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 ##.title~
@@ -21,8 +25,7 @@ dependencies:
 
   http:
 
-  xyz_utils: any
+  xyz_utils: ^0.44.4
   
   xyz_config:
-    path: ../
-  
+    path: ../../xyz_config
