@@ -17,7 +17,7 @@ import '/_common.dart';
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 /// Provides a way to easily read translation files.
-class TranslationsFileReader {
+class TranslationFileReader {
   //
   //
   //
@@ -35,7 +35,7 @@ class TranslationsFileReader {
   //
   //
 
-  const TranslationsFileReader({
+  const TranslationFileReader({
     required this.fileReader,
     this.fileType = ConfigFileType.YAML,
     this.translationsDirPath = const ["translations"],

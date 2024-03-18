@@ -22,7 +22,7 @@ void main() async {
   final fileReader = (filePath) => File(filePath).readAsString();
 
   // [Step 2] Create a translations reader that reads YAML files.
-  final yamlReader = TranslationsFileReader(
+  final yamlReader = TranslationFileReader(
     translationsDirPath: [
       "translations",
     ],

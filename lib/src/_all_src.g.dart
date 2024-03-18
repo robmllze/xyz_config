@@ -20,4 +20,4 @@ export 'refs/locale_ref.dart';
 export 'utils/config_file_type.dart';
 export 'utils/parse_source_for_strings_and_comments.dart';
 export 'utils/sample_locale.dart';
-export 'utils/translations_file_reader.dart';
+export 'utils/translation_file_reader.dart';
