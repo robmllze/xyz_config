@@ -14,7 +14,7 @@ import 'dart:io';
 
 void main(List<String> args) {
   if (args.length != 2) {
-    print("Usage: dart update_changelog.dart <version> <release-notes>");
+    print("[ERROR] Usage: dart update_changelog.dart <version> <release-notes>");
     exit(1);
   }
 
@@ -24,20 +24,20 @@ void main(List<String> args) {
   final file = File(changelogPath);
 
   if (!file.existsSync()) {
-    print("Error: $changelogPath does not exist.");
+    print("[ERROR] $changelogPath does not exist.");
     exit(1);
   }
 
   final contents = file.readAsStringSync();
   final versionExists = contents.contains("## [$version]");
   if (versionExists) {
-    print("[ISSUE] Version $version already exists in $changelogPath");
-    return;
+    print("[ERROR] Version $version already exists in $changelogPath");
+    exit(1);
   }
 
   final date = DateTime.now().toIso8601String().split("T").first;
 
-  final newEntry = "## [$version] - $date\n$releaseNotes\n\n";
+  final newEntry = "## [$version] - $date\n\n$releaseNotes";
   const changelog = "# Changelog";
   final hasChangelogHeader = contents.toLowerCase().contains(changelog.toLowerCase());
   final updatedContents = hasChangelogHeader

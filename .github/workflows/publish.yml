@@ -48,7 +48,16 @@ jobs:
         env:
           VERSION: ${{ needs.prepare.outputs.version }}
           RELEASE_NOTES: ${{ needs.prepare.outputs.release-notes }}
-        run: dart run ./update_changelog.dart "$VERSION" "$RELEASE_NOTES"
+        run: |
+          dart run path/to/update_changelog.dart "$VERSION" "$RELEASE_NOTES"
+      
+      - name: Commit and Push CHANGELOG.md Update
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          git add CHANGELOG.md
+          git commit -m "Update CHANGELOG.md for version $VERSION"
+          git push
 
   publish:
     needs: update_changelog
