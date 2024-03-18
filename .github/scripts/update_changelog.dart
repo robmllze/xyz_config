@@ -31,8 +31,8 @@ void main(List<String> args) {
   final contents = file.readAsStringSync();
   final versionExists = contents.contains("## [$version]");
   if (versionExists) {
-    print("[ERROR] Version $version already exists in $changelogPath");
-    exit(1);
+    print("[WARNING] Version $version already exists in $changelogPath");
+    return;
   }
 
   final newEntry = "## [$version]\n\n$releaseNotes";
