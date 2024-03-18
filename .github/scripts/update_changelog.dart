@@ -32,10 +32,12 @@ void main(List<String> args) {
   final versionExists = contents.contains("## [$version]");
   if (versionExists) {
     print("[WARNING] Version $version already exists in $changelogPath");
-    return;
   }
 
-  final newEntry = "## [$version]\n\n$releaseNotes";
+  final today = DateTime.now().toIso8601String().split("T").first;
+  final dateSting = "Date: $today";
+  final releaseNotesString = releaseNotes.split("\n").join("\n- ");
+  final newEntry = "## [$version]\n\n- Date: $dateSting\n- $releaseNotesString}";
   const changelog = "# Changelog";
   final hasChangelogHeader = contents.toLowerCase().contains(changelog.toLowerCase());
   final updatedContents = hasChangelogHeader

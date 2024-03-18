@@ -28,14 +28,11 @@ jobs:
           COMMIT_MESSAGES=$(git log --format=%B -n 1 HEAD)
           echo "::set-output name=messages::${COMMIT_MESSAGES}"
       
-      - name: Get current date
-        id: get_date
-        run: echo "::set-output name=today::$(date +'%Y-%m-%d')"
-      
       - name: Update CHANGELOG.md
         run: |
-          RELEASE_NOTES="- Date: ${{ steps.get_date.outputs.today }}\n- ${{ steps.get_commits.outputs.messages }}"
+          RELEASE_NOTES=$'- ${{ steps.get_commits.outputs.messages }}'
           dart run .github/scripts/update_changelog.dart "${{ steps.get_version.outputs.extracted_version }}" "$RELEASE_NOTES"
+        shell: bash
       
       - name: Commit and Push Changes
         run: |
