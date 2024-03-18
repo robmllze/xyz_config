@@ -35,9 +35,7 @@ void main(List<String> args) {
     exit(1);
   }
 
-  final date = DateTime.now().toIso8601String().split("T").first;
-
-  final newEntry = "## [$version] - $date\n\n$releaseNotes";
+  final newEntry = "## [$version]\n\n$releaseNotes";
   const changelog = "# Changelog";
   final hasChangelogHeader = contents.toLowerCase().contains(changelog.toLowerCase());
   final updatedContents = hasChangelogHeader
