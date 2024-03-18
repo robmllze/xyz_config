@@ -1,19 +1,5 @@
 # Developer Notes
 
-## Fetching Generators
-
-#### On macOS and Linux:
-
-```bash
-rm -rf ___generators/ && git clone https://github.com/robmllze/___generators.git && dart pub get && rm -rf ___generators/.git/
-```
-
-#### On Windows:
-
-```cmd
-rmdir /s /q ___generators/ && git clone https://github.com/robmllze/___generators.git && dart pub get && rmdir /s /q ___generators/.git/
-```
-
 ## Publishing
 
 1. Make your changes.
@@ -24,10 +10,28 @@ rmdir /s /q ___generators/ && git clone https://github.com/robmllze/___generator
 1. Update the version number in `CHANGELOG.md`.
 1. Run `dart pub publish --dry-run` to check for errors.
 1. Run `dart pub publish` to publish the package.
+---
+## macOS and Linux
 
-## Deleting .DS_Store files (MacOS)
-
+### Fetching Generators
+```bash
+rm -rf ___generators/ && git clone https://github.com/robmllze/___generators.git && dart pub get && rm -rf ___generators/.git/
+```
+### Adding the Workflow
+```bash
+rm -rf .github/ && git clone https://github.com/robmllze/pub.dev_package_workflow.git .github && rm -rf .github/.git/
+```
+### Deleting .DS_Store files
 ```bash
 cd your/project/path
 find . -name '.DS_Store' -type f -delete
+```
+---
+## Windows
+```bash
+rmdir /s /q ___generators/ && git clone https://github.com/robmllze/___generators.git && dart pub get && rmdir /s /q ___generators/
+```
+### Adding the Workflow
+```bash
+rmdir /s /q .github/ && git clone https://github.com/robmllze/pub.dev_package_workflow.git .github && rmdir /s /q .github/.git/
 ```
