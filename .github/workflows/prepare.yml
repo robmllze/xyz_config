@@ -10,7 +10,7 @@
 ## ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 ##.title~
 
-name: Update CHANGELOG.md on main branch update
+name: Prepare for release
 
 ## -----------------------------------------------------------------------------
 
@@ -25,12 +25,17 @@ jobs:
   update-changelog:
     runs-on: ubuntu-latest
     steps:
-      
       - name: Checkout code
         uses: actions/checkout@v3
       
       - name: Set up Dart
         uses: dart-lang/setup-dart@v1.2
+
+      - name: Format Dart code
+        run: dart format .
+
+      - name: Apply Dart fixes
+        run: dart fix --apply
 
       - name: Extract version from pubspec.yaml
         id: get_version
@@ -55,6 +60,6 @@ jobs:
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git add CHANGELOG.md
-          git commit -m "Automatically update CHANGELOG.md for version ${{ steps.get_version.outputs.extracted_version }}"
+          git add .
+          git commit -m "Prepare release for version ${{ steps.get_version.outputs.extracted_version }}"
           git push
