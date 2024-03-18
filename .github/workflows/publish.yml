@@ -49,7 +49,7 @@ jobs:
           VERSION: ${{ needs.prepare.outputs.version }}
           RELEASE_NOTES: ${{ needs.prepare.outputs.release-notes }}
         run: |
-          dart run path/to/update_changelog.dart "$VERSION" "$RELEASE_NOTES"
+          dart .github/scripts/update_changelog.dart "$VERSION" "$RELEASE_NOTES"
       
       - name: Commit and Push CHANGELOG.md Update
         run: |
