@@ -1,9 +1,25 @@
+##.title
+## ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+##
+## X|Y|Z & Dev
+##
+## Copyright Ⓒ Robert Mollentze, xyzand.dev
+## 
+## Licensing details can be found in the LICENSE file in the root directory.
+## 
+## ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+##.title~
+
 name: Update Changelog on main branch update
+
+## -----------------------------------------------------------------------------
 
 on:
   push:
     branches:
       - main
+
+## -----------------------------------------------------------------------------
 
 jobs:
   update-changelog:
@@ -30,7 +46,7 @@ jobs:
       
       - name: Update CHANGELOG.md
         run: |
-          RELEASE_NOTES=$'- ${{ steps.get_commits.outputs.messages }}'
+          RELEASE_NOTES=${{ steps.get_commits.outputs.messages }}
           dart run .github/scripts/update_changelog.dart "${{ steps.get_version.outputs.extracted_version }}" "$RELEASE_NOTES"
         shell: bash
       

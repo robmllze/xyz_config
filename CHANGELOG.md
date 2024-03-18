@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.15.3]
+## [0.1.0]
 
-- Date: Date: 2024-03-18
-- - update
+- Released @ 2024-03-18 05:40:33.907888Z
+- Initial release.
