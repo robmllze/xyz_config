@@ -14,7 +14,7 @@ This package is designed to help you configure your apps or add language support
 
 ```yaml
 dependencies:
-  xyz_config: {{version}}
+  xyz_config: any # or the latest version
 ```
 ## Contributing
 

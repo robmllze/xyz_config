@@ -53,9 +53,7 @@ void main(List<String> args) {
 Set<VersionSection> extractSections(String contents) {
   final headerPattern = RegExp(r"## \[\d+\.\d+\.\d+(\+\d+)?\]");
   final allVersionMatches = headerPattern.allMatches(contents).toList();
-
   final results = <VersionSection>{};
-
   for (var i = 0; i < allVersionMatches.length; i++) {
     final start = allVersionMatches[i].end;
     final end = i + 1 < allVersionMatches.length ? allVersionMatches[i + 1].start : contents.length;

@@ -10,7 +10,7 @@
 ## ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 ##.title~
 
-name: Update Changelog on main branch update
+name: Update CHANGELOG.md on main branch update
 
 ## -----------------------------------------------------------------------------
 
@@ -25,6 +25,7 @@ jobs:
   update-changelog:
     runs-on: ubuntu-latest
     steps:
+      
       - name: Checkout code
         uses: actions/checkout@v3
       
@@ -50,7 +51,7 @@ jobs:
           dart run .github/scripts/update_changelog.dart "${{ steps.get_version.outputs.extracted_version }}" "$RELEASE_NOTES"
         shell: bash
       
-      - name: Commit and Push Changes
+      - name: Commit and push changes
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
