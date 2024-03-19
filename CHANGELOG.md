@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.18.0]
+
+- Released @ 2024-03-19 04:38:23.022653Z
+- Add case insensitivity support
+
 ## [0.17.0]
 
 - Released @ 2024-03-19 03:41:19.799012Z
