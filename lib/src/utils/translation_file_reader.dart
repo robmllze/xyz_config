@@ -47,16 +47,16 @@ class TranslationFileReader {
 
   /// Reads a locale file.
   Future<FileConfig> read(
-    AppLocaleEnumMixin locale, {
+    String localeCode, {
     String? fileName,
   }) async {
     final filePath = p.joinAll([
       ...this.translationsDirPath,
-      fileName ?? "${locale.localeCode}.${this.fileType.name.toLowerCase()}",
+      fileName ?? "$localeCode.${this.fileType.name.toLowerCase()}",
     ]);
     final fileConfig = FileConfig(
       ref: ConfigFileRef(
-        ref: locale.localeCode,
+        ref: localeCode,
         type: this.fileType,
         read: () => this.fileReader(filePath),
       ),

@@ -31,10 +31,7 @@ void main() async {
 
   // [Step 3] Read the translations for the supported languages and set the
   // active language.
-  await yamlReader.read(
-    SampleLocale.ENGLISH_US,
-    fileName: "en_US.yaml",
-  );
+  await yamlReader.read("en_US");
 
   // [Step 4] Rebuild your widget tree from the root to update the UI with the
   // new translations.
@@ -57,27 +54,4 @@ void main() async {
 
   // prints "Message: Hello World!"
   print("Message: <<<message.helloworld||Hello!>>>".tr());
-
-  // prints "English (US)
-  print("Locales.descriptions.${SampleLocale.ENGLISH_US.localeCode}".tr());
-}
-
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
-// [Step 6] You can create your own locale enum by extending the LocaleEnumMixin
-// and defining your own locales. Then you can use this instead of SampleLocale,
-// which was just included for demonstration purposes.
-enum AppLocale with AppLocaleEnumMixin {
-  ENGLISH_US("en_US", "English (US)"),
-  AFRIKAANS_ZA("af_ZA", "Afrikaans (ZA)");
-
-  final String localeCode;
-  final String localeDescription;
-
-  const AppLocale(
-    this.localeCode,
-    this.localeDescription,
-  );
-
-  ConfigRef get localeRef => ConfigRef(ref: this.localeCode);
 }

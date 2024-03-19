@@ -51,7 +51,7 @@ class LocaleRef extends ConfigRef<String, Type> {
       final countryCode = parts[1];
       return LocaleRef(languageCode, countryCode);
     }
-    return SampleLocale.ENGLISH_US.localeRef;
+    return LocaleRef("en", "US");
   }
 
   //
