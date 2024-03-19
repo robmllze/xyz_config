@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.17.0]
+
+- Released @ 2024-03-19 03:41:19.799012Z
+- Update locale reference in translation file reader
+
 ## [0.16.1]
 
 - Released @ 2024-03-19 01:51:56.027471Z
