@@ -37,6 +37,9 @@ class Config<TConfigRef extends ConfigRef> extends Equatable {
   final String separator;
   final String delimiter;
 
+  /// Whether the config keys are case sensitive.
+  final bool caseSensitive;
+
   //
   //
   //
@@ -47,6 +50,7 @@ class Config<TConfigRef extends ConfigRef> extends Equatable {
     this.closing = XYZ_CONFIG_DEFAULT_CLOSING,
     this.separator = XYZ_CONFIG_DEFAULT_SEPARATOR,
     this.delimiter = XYZ_CONFIG_DEFAULT_DELIMITER,
+    this.caseSensitive = true,
   }) {
     this.fields = {};
   }
@@ -65,6 +69,7 @@ class Config<TConfigRef extends ConfigRef> extends Equatable {
         closing: this.closing,
         delimiter: this.delimiter,
         separator: this.separator,
+        caseSensitive: this.caseSensitive,
       ),
     );
     this.fields.addAll(newFields);
@@ -80,7 +85,6 @@ class Config<TConfigRef extends ConfigRef> extends Equatable {
     Map<dynamic, dynamic> args = const {},
     T? fallback,
     String? Function(String, dynamic, String?)? callback,
-    bool caseSensitive = true,
   }) {
     final expandedArgs = expandJson(args);
     var data = {
@@ -92,9 +96,8 @@ class Config<TConfigRef extends ConfigRef> extends Equatable {
       opening: this.opening,
       closing: this.closing,
     );
-    if (!caseSensitive) {
-      data = data.map((k, v) => MapEntry(k.toString().toLowerCase(), v));
-      input = input = caseSensitive ? value : value.toLowerCase();
+    if (!this.caseSensitive) {
+      data = data.mapKeys((k) => k.toString().toLowerCase());
     }
     final r = replaceAllPatterns(
       input,
@@ -102,6 +105,7 @@ class Config<TConfigRef extends ConfigRef> extends Equatable {
       opening: this.opening,
       closing: this.closing,
       delimiter: this.delimiter,
+      caseSensitive: this.caseSensitive,
       callback: callback,
     );
     final res = let<T>(r) ?? fallback;

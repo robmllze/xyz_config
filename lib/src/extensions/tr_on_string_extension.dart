@@ -23,7 +23,6 @@ extension TrOnStringExtension on String {
           this,
           args: args,
           fallback: this,
-          caseSensitive: false,
         ) ??
         this;
   }

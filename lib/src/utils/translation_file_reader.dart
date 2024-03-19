@@ -60,6 +60,7 @@ class TranslationFileReader {
         type: this.fileType,
         read: () => this.fileReader(filePath),
       ),
+      caseSensitive: false,
     );
     await TranslationManager().setFileConfig(fileConfig);
     return fileConfig;

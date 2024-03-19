@@ -49,6 +49,7 @@ class FileConfig extends Config<ConfigFileRef> {
     super.closing = XYZ_CONFIG_DEFAULT_CLOSING,
     super.separator = XYZ_CONFIG_DEFAULT_SEPARATOR,
     super.delimiter = XYZ_CONFIG_DEFAULT_DELIMITER,
+    super.caseSensitive,
   });
 
   //

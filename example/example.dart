@@ -44,14 +44,14 @@ void main() async {
   print("message.helloworld".tr());
 
   // prints "Hello World!"
-  print("message.helloworld||Hi there world!".tr());
+  print("Hi there world!||message.HELLOWORLD".tr());
 
   // prints "Hi there world!"
-  print("message.doesntexist||Hi there world!".tr());
+  print("Hi there world!||message.doesntexist".tr());
 
   // prints "Hello World! is the message!"
   print("<<<message.helloworld>>> is the message!".tr());
 
   // prints "Message: Hello World!"
-  print("Message: <<<message.helloworld||Hello!>>>".tr());
+  print("Message: <<<Hello!||message.helloworld>>>".tr());
 }
