@@ -47,7 +47,7 @@ class TranslationFileReader {
 
   /// Reads a locale file.
   Future<FileConfig> read(
-    LocaleEnumMixin locale, {
+    AppLocaleEnumMixin locale, {
     String? fileName,
   }) async {
     final filePath = p.joinAll([

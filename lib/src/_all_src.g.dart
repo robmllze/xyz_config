@@ -17,6 +17,7 @@ export 'managers/translation_manager.dart';
 export 'refs/config_file_ref.dart';
 export 'refs/config_ref.dart';
 export 'refs/locale_ref.dart';
+export 'utils/app_locale_enum_mixin.dart';
 export 'utils/config_file_type.dart';
 export 'utils/parse_source_for_strings_and_comments.dart';
 export 'utils/sample_locale.dart';

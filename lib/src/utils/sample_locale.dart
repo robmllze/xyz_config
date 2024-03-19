@@ -16,7 +16,7 @@ import '/_common.dart';
 
 /// A sample locale enum. You may wish to replace this with your own locale
 /// enum.
-enum SampleLocale with LocaleEnumMixin {
+enum SampleLocale with AppLocaleEnumMixin {
   //
   //
   //
@@ -159,21 +159,5 @@ enum SampleLocale with LocaleEnumMixin {
   LocaleRef get localeRef => LocaleRef.fromCode(this.localeCode);
 
   @override
-  String get localeDescription =>
-      "${this._defaultDescription}||Locales.${this.name}".tr();
-}
-
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
-/// A mixin for an enum that represents a locale such as [SampleLocale] to
-/// provide [localeCode], [localeRef] and [localeDescription].
-mixin LocaleEnumMixin<TConfigRef extends ConfigRef> {
-  /// The locale code, such as "en_US".
-  String get localeCode;
-
-  /// The reference to this locale.
-  TConfigRef get localeRef;
-
-  /// The description of this locale.
-  String get localeDescription;
+  String get localeDescription => "${this._defaultDescription}||Locales.${this.name}".tr();
 }

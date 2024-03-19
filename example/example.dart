@@ -67,14 +67,14 @@ void main() async {
 // [Step 6] You can create your own locale enum by extending the LocaleEnumMixin
 // and defining your own locales. Then you can use this instead of SampleLocale,
 // which was just included for demonstration purposes.
-enum Locale with LocaleEnumMixin {
+enum AppLocale with AppLocaleEnumMixin {
   ENGLISH_US("en_US", "English (US)"),
   AFRIKAANS_ZA("af_ZA", "Afrikaans (ZA)");
 
   final String localeCode;
   final String localeDescription;
 
-  const Locale(
+  const AppLocale(
     this.localeCode,
     this.localeDescription,
   );

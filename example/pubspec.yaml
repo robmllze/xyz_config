@@ -21,9 +21,6 @@ environment:
 ## -----------------------------------------------------------------------------
 
 dependencies:
-
-  http:
-
-  xyz_utils: any
   
-  xyz_config: any
+  xyz_config:
+    path: ../
