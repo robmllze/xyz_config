@@ -2,8 +2,9 @@
 
 ## [0.18.1]
 
-- Released @ 2024-03-19 07:05:29.948082Z
+- Released @ 2024-03-19 07:32:04.895585Z
 - Update dependencies
+- Update developer notes
 
 ## [0.18.0]
 
