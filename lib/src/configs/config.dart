@@ -99,7 +99,7 @@ class Config<TConfigRef extends ConfigRef> extends Equatable {
     if (!this.caseSensitive) {
       data = data.mapKeys((k) => k.toString().toLowerCase());
     }
-    final r = replaceAllPatterns(
+    final r = replacePatterns(
       input,
       data,
       opening: this.opening,
