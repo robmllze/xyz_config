@@ -6,13 +6,13 @@ This package is designed to help you configure your apps or add language support
 
 ## Quickstart
 
-1. Create a translations file at `your_flutter_project/assets/translations/en_US.yaml`.
+1. Create a translations file at `your_flutter_project/assets/translations/en_US.yaml`:
 ```yaml
 greetings:
   HelloWorld: Hello World!
 ```
 
-2. Access the translations in your app.
+2. Access the translations in your app:
 ```dart
   final translationFileReader = TranslationFileReader(
     translationsDirPath: ["translations"],
