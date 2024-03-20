@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.19.0]
+
+- Released @ 2024-03-20 01:44:49.219599Z
+- Update translations and configuration handling
+
 ## [0.18.1]
 
 - Released @ 2024-03-19 07:33:05.615114Z
