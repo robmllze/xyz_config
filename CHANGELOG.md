@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.22.0]
+## [0.21.0]
 
 - Released @ 2024-03-20 09:34:27.861436Z
 - Update ConfigFileType enum and TranslationFileReader to use file extensions
