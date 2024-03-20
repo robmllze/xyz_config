@@ -84,7 +84,11 @@ class Config<TConfigRef extends ConfigRef> extends Equatable {
     String value, {
     Map<dynamic, dynamic> args = const {},
     T? fallback,
-    String? Function(String, dynamic, String?)? callback,
+    String? Function(
+      String key,
+      dynamic suggestedReplacementValue,
+      String defaultValue,
+    )? callback,
   }) {
     final expandedArgs = expandJson(args);
     var data = {
@@ -96,9 +100,6 @@ class Config<TConfigRef extends ConfigRef> extends Equatable {
       opening: this.opening,
       closing: this.closing,
     );
-    if (!this.caseSensitive) {
-      data = data.mapKeys((k) => k.toString().toLowerCase());
-    }
     final r = replacePatterns(
       input,
       data,

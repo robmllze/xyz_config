@@ -19,7 +19,7 @@ extension TrOnStringExtension on String {
   String tr([
     Map<dynamic, dynamic> args = const {},
   ]) {
-    return TranslationManager.translationFileConfig?.map<String>(
+    return TranslationManager.translationFileConfig.map<String>(
           this,
           args: args,
           fallback: this,

@@ -16,42 +16,50 @@ import 'package:xyz_config/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
+// Step 1: Create a translations file somewhere and call it something like
+// `en_US.yaml`.
+
+/**
+```yaml
+greetings:
+  HelloWorld: Hello World!
+```
+*/
+
 void main() async {
-  // [Step 1] Create a function that reads a file and returns its contents as a
-  // string.
+  // Step 2 - Create a function that reads a file and returns its contents as a
+  // string. In Flutter, you'd use the rootBundle.loadString or you can
+  // even read remote files using the http package.
   final fileReader = (filePath) => File(filePath).readAsString();
 
-  // [Step 2] Create a translations reader that reads YAML files.
-  final yamlReader = TranslationFileReader(
-    translationsDirPath: [
-      "translations",
-    ],
+  // Step 3 - Create a translations reader that reads YAML files from the
+  // translations/ directory.
+  final translationFileReader = TranslationFileReader(
+    translationsDirPath: ["translations"],
+    fileType: ConfigFileType.YAML,
     fileReader: fileReader,
   );
 
-  // [Step 3] Read the translations for the supported languages and set the
-  // active language.
-  await yamlReader.read("en_US");
+  // Step 4 - Read the en_US translation and set it as the active translation.
+  // In Flutter, you'd want to rebuild your widget tree after setting this.
+  await translationFileReader.read("en_US");
 
-  // [Step 4] Rebuild your widget tree from the root to update the UI with the
-  // new translations.
+  // Step 5 - Use the tr() extension method to translate strings.
+  // The text after the || is what will be printed if the translation is missing.
+  // Use the <<<>>> syntax to include the translated string in a larger string.
 
-  // [Step 5] Use the tr() extension method to translate strings. The text after
-  // the || is the default value if the translation is not found. Use the
-  // <<<>>> syntax to include the translated string in a larger string.
+  // No default value, prints "Hello World!"
+  print("greetings.HelloWorld".tr());
 
-  // prints "Hello World!"
-  print("message.helloworld".tr());
-
-  // prints "Hello World!"
+  // Case insensitive, prints "Hello World!"
   print("Hi there world!||message.HELLOWORLD".tr());
 
-  // prints "Hi there world!"
-  print("Hi there world!||message.doesntexist".tr());
+  // Key doesn't exist, prints "Uhm, hola!"
+  print("Uhm, hola!||greetings.doesntexist".tr());
 
-  // prints "Hello World! is the message!"
-  print("<<<message.helloworld>>> is the message!".tr());
+  // Key exists, prints "Hello World! is the message!"
+  print("<<<greetings.HelloWorld>>> is the message!".tr());
 
-  // prints "Message: Hello World!"
-  print("Message: <<<Hello!||message.helloworld>>>".tr());
+  // Key exists, prints "Greeting: Hello World!"
+  print("Greeting: <<<Hello there old friend!||greetings.HelloWorld>>>".tr());
 }

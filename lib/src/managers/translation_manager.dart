@@ -20,8 +20,8 @@ class TranslationManager extends FileConfigManager {
   //
   //
 
-  static FileConfig? _translationFileConfig;
-  static FileConfig? get translationFileConfig => _translationFileConfig;
+  static var _translationFileConfig = FileConfig();
+  static FileConfig get translationFileConfig => _translationFileConfig;
 
   //
   //
