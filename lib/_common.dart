@@ -10,11 +10,11 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-export 'dart:convert';
+export "dart:convert";
 
-export 'package:meta/meta.dart';
+export "package:meta/meta.dart";
 
-export 'package:yaml/yaml.dart';
-export 'package:xyz_utils/web_friendly.dart';
+export "package:yaml/yaml.dart";
+export "package:xyz_utils/web_friendly.dart";
 
-export 'src/_all_src.g.dart';
+export "src/_all_src.g.dart";
