@@ -12,8 +12,24 @@
 
 /// The supported config file types.
 enum ConfigFileType {
-  JSON,
-  JSONC,
-  YAML,
-  CSV,
+  //
+  //
+  //
+
+  JSON("json"),
+  JSONC("jsonc"),
+  YAML("yaml"),
+  CSV("csv");
+
+  //
+  //
+  //
+
+  final String extension;
+
+  //
+  //
+  //
+
+  const ConfigFileType(this.extension);
 }

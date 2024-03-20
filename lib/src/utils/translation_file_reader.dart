@@ -52,7 +52,7 @@ class TranslationFileReader {
   }) async {
     final filePath = p.joinAll([
       ...this.translationsDirPath,
-      fileName ?? "$localeCode.${this.fileType.name.toLowerCase()}",
+      fileName ?? "$localeCode.${this.fileType.extension}",
     ]);
     final fileConfig = FileConfig(
       ref: ConfigFileRef(
