@@ -2,7 +2,7 @@
 
 ## [0.21.0]
 
-- Released @ 2024-03-20 09:34:27.861436Z
+- Released @ 2024-03-20 09:35:12.163288Z
 - Update ConfigFileType enum and TranslationFileReader to use file extensions
 
 ## [0.20.0]
