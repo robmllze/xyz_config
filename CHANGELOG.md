@@ -2,7 +2,7 @@
 
 ## [0.19.0]
 
-- Released @ 2024-03-20 01:45:44.989576Z
+- Released @ 2024-03-20 01:46:31.396600Z
 - Update translations and configuration handling
 
 ## [0.18.1]
