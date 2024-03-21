@@ -10,9 +10,9 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import "dart:io";
+import 'dart:io';
 
-import "package:xyz_config/_common.dart";
+import 'package:xyz_config/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -35,31 +35,31 @@ void main() async {
   // Step 3 - Create a translations reader that reads YAML files from the
   // translations/ directory.
   final translationFileReader = TranslationFileReader(
-    translationsDirPath: ["translations"],
+    translationsDirPath: ['translations'],
     fileType: ConfigFileType.YAML,
     fileReader: fileReader,
   );
 
   // Step 4 - Read the en_US translation and set it as the active translation.
   // In Flutter, you'd want to rebuild your widget tree after setting this.
-  await translationFileReader.read("en_US");
+  await translationFileReader.read('en_US');
 
   // Step 5 - Use the tr() extension method to translate strings.
   // The text after the || is what will be printed if the translation is missing.
   // Use the <<<>>> syntax to include the translated string in a larger string.
 
   // No default value, prints "Hello World!"
-  print("greetings.HelloWorld".tr());
+  print('greetings.HelloWorld'.tr());
 
   // Case insensitive, prints "Hello World!"
-  print("Hi there world!||message.HELLOWORLD".tr());
+  print('Hi there world!||message.HELLOWORLD'.tr());
 
   // Key doesn't exist, prints "Uhm, hola!"
-  print("Uhm, hola!||greetings.doesntexist".tr());
+  print('Uhm, hola!||greetings.doesntexist'.tr());
 
   // Key exists, prints "Hello World! is the message!"
-  print("<<<greetings.HelloWorld>>> is the message!".tr());
+  print('<<<greetings.HelloWorld>>> is the message!'.tr());
 
   // Key exists, prints "Greeting: Hello World!"
-  print("Greeting: <<<Hello there old friend!||greetings.HelloWorld>>>".tr());
+  print('Greeting: <<<Hello there old friend!||greetings.HelloWorld>>>'.tr());
 }

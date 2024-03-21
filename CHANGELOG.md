@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.22.0]
+
+- Released @ 2024-03-21 01:34:45.642481Z
+- Update linter rules
+
 ## [0.21.0]
 
 - Released @ 2024-03-20 09:35:12.163288Z

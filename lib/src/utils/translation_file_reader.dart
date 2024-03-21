@@ -10,9 +10,9 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import "package:path/path.dart" as p;
+import 'package:path/path.dart' as p;
 
-import "/_common.dart";
+import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -38,7 +38,7 @@ class TranslationFileReader {
   const TranslationFileReader({
     required this.fileReader,
     this.fileType = ConfigFileType.YAML,
-    this.translationsDirPath = const ["translations"],
+    this.translationsDirPath = const ['translations'],
   });
 
   //
@@ -52,7 +52,7 @@ class TranslationFileReader {
   }) async {
     final filePath = p.joinAll([
       ...this.translationsDirPath,
-      fileName ?? "$localeCode.${this.fileType.extension}",
+      fileName ?? '$localeCode.${this.fileType.extension}',
     ]);
     final fileConfig = FileConfig(
       ref: ConfigFileRef(

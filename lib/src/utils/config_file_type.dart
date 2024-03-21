@@ -16,10 +16,10 @@ enum ConfigFileType {
   //
   //
 
-  JSON("json"),
-  JSONC("jsonc"),
-  YAML("yaml"),
-  CSV("csv");
+  JSON('json'),
+  JSONC('jsonc'),
+  YAML('yaml'),
+  CSV('csv');
 
   //
   //

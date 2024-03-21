@@ -10,7 +10,7 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import "/_common.dart";
+import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -94,10 +94,10 @@ class FileConfig extends Config<ConfigFileRef> {
     if (src != null) {
       final result = parseSourceForStringsAndComments(src);
       for (final c in result.multiLineComments) {
-        src = src!.replaceAll(c, "");
+        src = src!.replaceAll(c, '');
       }
       for (final c in result.singleLineComments) {
-        src = src!.replaceAll(c, "");
+        src = src!.replaceAll(c, '');
       }
       final data = jsonDecode(src!);
       this.setFields(data);

@@ -10,7 +10,7 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import "dart:convert";
+import 'dart:convert';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -18,9 +18,9 @@ import "dart:convert";
 ParseSourceForStringsAndCommentsResult parseSourceForStringsAndComments(
   String source,
 ) {
-  var buffer = "";
+  var buffer = '';
   final cNull = const Utf8Decoder().convert([0]);
-  final cNotNewline = RegExp("[^\n]");
+  final cNotNewline = RegExp('[^\n]');
   final matchesMultiLineComments =
       RegExp(_REG_EXP_MULTI_LINE_COMMENT).allMatches(source);
   for (final match in matchesMultiLineComments) {
@@ -67,8 +67,8 @@ ParseSourceForStringsAndCommentsResult parseSourceForStringsAndComments(
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 const _REG_EXP_MULTI_LINE_COMMENT =
-    r"(\/\*([^*]|[\r\n]|(\*+([^*\/]|[\r\n])))*\*+\/)";
-const _REG_EXP_SINGLE_LINE_COMMENT = r"\/\/.*";
+    r'(\/\*([^*]|[\r\n]|(\*+([^*\/]|[\r\n])))*\*+\/)';
+const _REG_EXP_SINGLE_LINE_COMMENT = r'\/\/.*';
 const _REG_EXP_QUOTED_STRING = r"""(["'])([^\\]*?(?:\\.[^\\]*?)*)\1""";
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░

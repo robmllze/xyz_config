@@ -10,9 +10,9 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import "package:equatable/equatable.dart";
+import 'package:equatable/equatable.dart';
 
-import "/_common.dart";
+import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -124,16 +124,16 @@ class Config<TConfigRef extends ConfigRef> extends Equatable {
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 /// The default opening  String.
-const XYZ_CONFIG_DEFAULT_OPENING = "<<<";
+const XYZ_CONFIG_DEFAULT_OPENING = '<<<';
 
 /// The default closing String.
-const XYZ_CONFIG_DEFAULT_CLOSING = ">>>";
+const XYZ_CONFIG_DEFAULT_CLOSING = '>>>';
 
 /// The default separator  String.
-const XYZ_CONFIG_DEFAULT_SEPARATOR = ".";
+const XYZ_CONFIG_DEFAULT_SEPARATOR = '.';
 
 /// The default delimiter String.
-const XYZ_CONFIG_DEFAULT_DELIMITER = "||";
+const XYZ_CONFIG_DEFAULT_DELIMITER = '||';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
