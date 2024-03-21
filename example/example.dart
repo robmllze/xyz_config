@@ -1,7 +1,7 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// X|Y|Z & Dev
+// 🇽🇾🇿 & Dev
 //
 // Copyright Ⓒ Robert Mollentze, xyzand.dev
 //
@@ -48,18 +48,18 @@ void main() async {
   // The text after the || is what will be printed if the translation is missing.
   // Use the <<<>>> syntax to include the translated string in a larger string.
 
-  // No default value, prints "Hello World!"
+  // No default value, prints 'Hello World!'
   print('greetings.HelloWorld'.tr());
 
-  // Case insensitive, prints "Hello World!"
+  // Case insensitive, prints 'Hello World!'
   print('Hi there world!||message.HELLOWORLD'.tr());
 
-  // Key doesn't exist, prints "Uhm, hola!"
+  // Key doesn't exist, prints 'Uhm, hola!'
   print('Uhm, hola!||greetings.doesntexist'.tr());
 
-  // Key exists, prints "Hello World! is the message!"
+  // Key exists, prints 'Hello World! is the message!'
   print('<<<greetings.HelloWorld>>> is the message!'.tr());
 
-  // Key exists, prints "Greeting: Hello World!"
+  // Key exists, prints 'Greeting: Hello World!'
   print('Greeting: <<<Hello there old friend!||greetings.HelloWorld>>>'.tr());
 }

@@ -1,7 +1,7 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// X|Y|Z & Dev
+// 🇽🇾🇿 & Dev
 //
 // Copyright Ⓒ Robert Mollentze, xyzand.dev
 //
@@ -20,10 +20,10 @@ class LocaleRef extends ConfigRef<String, Type> {
   //
   //
 
-  /// The language code, such as "en".
+  /// The language code, such as 'en'.
   final String languageCode;
 
-  /// The country code, such as "US".
+  /// The country code, such as 'US'.
   final String countryCode;
 
   //

@@ -1,7 +1,7 @@
 ##.title
 ## ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 ##
-## X|Y|Z & Dev
+## 🇽🇾🇿 & Dev
 ##
 ## Copyright Ⓒ Robert Mollentze, xyzand.dev
 ## 
@@ -13,7 +13,7 @@
 name: xyz_config
 description: This package allows you to add configurations and language support to your apps.
 repository: https://github.com/robmllze/xyz_config
-version: 0.24.0
+version: 0.24.1
 
 ## -----------------------------------------------------------------------------
 
@@ -25,7 +25,7 @@ environment:
 
 dependencies:
 
-  xyz_utils: ^0.51.0
+  xyz_utils: ^0.51.1
 
   yaml: ^3.1.2
   meta: ^1.11.0
