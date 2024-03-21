@@ -15,14 +15,14 @@ greetings:
 2. Access the translations in your app:
 ```dart
   final translationFileReader = TranslationFileReader(
-    translationsDirPath: ["translations"],
+    translationsDirPath: ['translations'],
     fileType: ConfigFileType.YAML,
     fileReader: (filePath) => rootBundle.loadString(filePath),
   );
 
-  await translationFileReader.read("en_US");
+  await translationFileReader.read('en_US');
 
-  print("greetings.HelloWorld".tr());
+  print('greetings.HelloWorld'.tr());
 ```
 
 ## Documentation
