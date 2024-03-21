@@ -144,10 +144,10 @@ String _addOpeningAndClosing(
 }) {
   var output = input;
   if (!input.contains(opening)) {
-    output = "$opening$output";
+    output = '$opening$output';
   }
   if (!input.contains(closing)) {
-    output = "$output$closing";
+    output = '$output$closing';
   }
   return output;
 }
