@@ -19,15 +19,9 @@ extension CfOnStringExtension on String {
   T? cf<T>(
     Config config, [
     Map<dynamic, dynamic> args = const {},
-    ReplacePatternsSettings? settings =
-        const ReplacePatternsSettings(opening: '{', closing: '}'),
   ]) {
-    final src = this.replacePatterns(
-      args.mapKeys((k) => k.toString()),
-      settings: settings ?? config.settings,
-    );
     return config.map<T>(
-      src,
+      this,
       args: args,
     );
   }
