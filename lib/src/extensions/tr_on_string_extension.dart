@@ -18,7 +18,8 @@ extension TrOnStringExtension on String {
   /// Translates the string using the active translation file.
   String tr({
     Map<dynamic, dynamic> args = const {},
-    ReplacePatternsSettings? settings = const ReplacePatternsSettings(opening: '{', closing: '}'),
+    ReplacePatternsSettings? settings =
+        const ReplacePatternsSettings(opening: '{', closing: '}'),
   }) {
     final fileConfig = TranslationManager.translationFileConfig;
     final src = this.replacePatterns(

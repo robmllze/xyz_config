@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.26.0]
+
+- Released @ 2024-03-22 06:25:47.720795Z
+- Update config settings handling
+
 ## [0.25.0]
 
 - Released @ 2024-03-22 05:52:54.846311Z
