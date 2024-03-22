@@ -32,13 +32,7 @@ class Config<TConfigRef extends ConfigRef> extends Equatable {
   //
   //
 
-  final String opening;
-  final String closing;
-  final String separator;
-  final String delimiter;
-
-  /// Whether the config keys are case sensitive.
-  final bool caseSensitive;
+  final ReplacePatternsSettings settings;
 
   //
   //
@@ -46,11 +40,7 @@ class Config<TConfigRef extends ConfigRef> extends Equatable {
 
   Config({
     this.ref,
-    this.opening = XYZ_CONFIG_DEFAULT_OPENING,
-    this.closing = XYZ_CONFIG_DEFAULT_CLOSING,
-    this.separator = XYZ_CONFIG_DEFAULT_SEPARATOR,
-    this.delimiter = XYZ_CONFIG_DEFAULT_DELIMITER,
-    this.caseSensitive = true,
+    this.settings = const ReplacePatternsSettings(),
   }) {
     this.fields = {};
   }
@@ -63,14 +53,7 @@ class Config<TConfigRef extends ConfigRef> extends Equatable {
   void setFields(Map json) {
     this.fields.clear();
     final newFields = expandJson(
-      recursiveReplace(
-        json,
-        opening: this.opening,
-        closing: this.closing,
-        delimiter: this.delimiter,
-        separator: this.separator,
-        caseSensitive: this.caseSensitive,
-      ),
+      recursiveReplace(json, settings: this.settings),
     );
     this.fields.addAll(newFields);
   }
@@ -84,12 +67,9 @@ class Config<TConfigRef extends ConfigRef> extends Equatable {
     String value, {
     Map<dynamic, dynamic> args = const {},
     T? fallback,
-    String? Function(
-      String key,
-      dynamic suggestedReplacementValue,
-      String defaultValue,
-    )? callback,
+    ReplacePatternsSettings? settings,
   }) {
+    final settingsOverride = settings ?? this.settings;
     final expandedArgs = expandJson(args);
     var data = {
       ...this.fields,
@@ -97,17 +77,13 @@ class Config<TConfigRef extends ConfigRef> extends Equatable {
     };
     var input = _addOpeningAndClosing(
       value,
-      opening: this.opening,
-      closing: this.closing,
+      opening: settingsOverride.opening,
+      closing: settingsOverride.closing,
     );
     final r = replacePatterns(
       input,
       data,
-      opening: this.opening,
-      closing: this.closing,
-      delimiter: this.delimiter,
-      caseSensitive: this.caseSensitive,
-      callback: callback,
+      settings: settingsOverride,
     );
     final res = let<T>(r) ?? fallback;
     return res;
@@ -123,24 +99,10 @@ class Config<TConfigRef extends ConfigRef> extends Equatable {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-/// The default opening  String.
-const XYZ_CONFIG_DEFAULT_OPENING = '<<<';
-
-/// The default closing String.
-const XYZ_CONFIG_DEFAULT_CLOSING = '>>>';
-
-/// The default separator  String.
-const XYZ_CONFIG_DEFAULT_SEPARATOR = '.';
-
-/// The default delimiter String.
-const XYZ_CONFIG_DEFAULT_DELIMITER = '||';
-
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
 String _addOpeningAndClosing(
   String input, {
-  String opening = XYZ_CONFIG_DEFAULT_OPENING,
-  String closing = XYZ_CONFIG_DEFAULT_CLOSING,
+  required String opening,
+  required String closing,
 }) {
   var output = input;
   if (!input.contains(opening)) {

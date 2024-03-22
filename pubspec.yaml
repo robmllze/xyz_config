@@ -13,7 +13,7 @@
 name: xyz_config
 description: This package allows you to add configurations and language support to your apps.
 repository: https://github.com/robmllze/xyz_config
-version: 0.25.0
+version: 0.26.0
 
 ## -----------------------------------------------------------------------------
 
@@ -25,7 +25,7 @@ environment:
 
 dependencies:
 
-  xyz_utils: ^0.51.1
+  xyz_utils: ^0.52.0
 
   yaml: ^3.1.2
   meta: ^1.11.0

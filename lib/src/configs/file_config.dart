@@ -23,17 +23,11 @@ class FileConfig extends Config<ConfigFileRef> {
   static Future<FileConfig> read({
     required ConfigFileRef ref,
     Map<dynamic, dynamic> fields = const {},
-    String opening = XYZ_CONFIG_DEFAULT_OPENING,
-    String closing = XYZ_CONFIG_DEFAULT_CLOSING,
-    String separator = XYZ_CONFIG_DEFAULT_SEPARATOR,
-    String delimiter = XYZ_CONFIG_DEFAULT_DELIMITER,
+    ReplacePatternsSettings settings = const ReplacePatternsSettings(),
   }) async {
     final config = FileConfig(
       ref: ref,
-      opening: opening,
-      closing: closing,
-      separator: separator,
-      delimiter: delimiter,
+      settings: settings,
     );
     await config.readAssociatedFile();
     return config;
@@ -45,11 +39,7 @@ class FileConfig extends Config<ConfigFileRef> {
 
   FileConfig({
     super.ref,
-    super.opening = XYZ_CONFIG_DEFAULT_OPENING,
-    super.closing = XYZ_CONFIG_DEFAULT_CLOSING,
-    super.separator = XYZ_CONFIG_DEFAULT_SEPARATOR,
-    super.delimiter = XYZ_CONFIG_DEFAULT_DELIMITER,
-    super.caseSensitive,
+    super.settings,
   });
 
   //
@@ -123,7 +113,7 @@ class FileConfig extends Config<ConfigFileRef> {
           return MapEntry(value[0], value[1]);
         } else if (value.length > 2) {
           return MapEntry(
-            value.sublist(0, value.length - 1).join(this.separator),
+            value.sublist(0, value.length - 1).join(this.settings.separator),
             value.last,
           );
         } else {
