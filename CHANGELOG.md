@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.25.0]
+
+- Released @ 2024-03-22 05:52:54.846311Z
+- Improve tr and cf extensions
+
 ## [0.24.2]
 
 - Released @ 2024-03-22 00:53:38.820915Z
