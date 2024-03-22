@@ -6,7 +6,7 @@ This package allows you to add configurations and language support to your apps.
 
 ## Quickstart
 
-1. Create a translations file at `your_flutter_project/assets/translations/en_US.yaml`:
+1. Create a translations file at `your_flutter_project/assets/translations/en_us.yaml`.
 ```yaml
 greetings:
   HelloWorld: Hello World!
@@ -20,10 +20,12 @@ greetings:
     fileReader: (filePath) => rootBundle.loadString(filePath),
   );
 
-  await translationFileReader.read('en_US');
+  await translationFileReader.read('en_us'.toLowerCase());
 
   print('greetings.HelloWorld'.tr());
 ```
+
+**Tip:** Linux file systems and Firebase Hosting file systems are case sensitive. Make sure to use the correct case for your file paths. As a rule of thumb, always use lowercase file paths.
 
 ## Documentation
 
