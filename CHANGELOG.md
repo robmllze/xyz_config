@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.27.0]
+
+- Released @ 2024-03-22 07:09:24.476065Z
+- Update translation settings
+
 ## [0.26.0]
 
 - Released @ 2024-03-22 06:25:47.720795Z
