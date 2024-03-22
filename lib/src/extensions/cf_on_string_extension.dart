@@ -20,8 +20,15 @@ extension CfOnStringExtension on String {
     Config config, [
     Map<dynamic, dynamic> args = const {},
   ]) {
+    final src = this.replacePatterns(
+      args.mapKeys((k) => k.toString()),
+      opening: config.opening,
+      closing: config.closing,
+      delimiter: config.delimiter,
+      caseSensitive: config.caseSensitive,
+    );
     return config.map<T>(
-      this,
+      src,
       args: args,
     );
   }

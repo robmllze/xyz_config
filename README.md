@@ -25,7 +25,7 @@ greetings:
   print('greetings.HelloWorld'.tr());
 ```
 
-**Tip:** Linux file systems and Firebase Hosting file systems are case sensitive. Make sure to use the correct case for your file paths. As a rule of thumb, always use lowercase file paths.
+**Tip:** File names are case sensitive on most Linux based systems like Firebase Hosting. Make sure to use the correct case for your file paths. As a rule of thumb, always use lowercase file paths.
 
 ## Documentation
 

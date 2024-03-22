@@ -19,11 +19,19 @@ extension TrOnStringExtension on String {
   String tr([
     Map<dynamic, dynamic> args = const {},
   ]) {
-    return TranslationManager.translationFileConfig.map<String>(
-          this,
+    final fileConfig = TranslationManager.translationFileConfig;
+    final src = this.replacePatterns(
+      args.mapKeys((k) => k.toString()),
+      opening: fileConfig.opening,
+      closing: fileConfig.closing,
+      delimiter: fileConfig.delimiter,
+      caseSensitive: fileConfig.caseSensitive,
+    );
+    return fileConfig.map<String>(
+          src,
           args: args,
-          fallback: this,
+          fallback: src,
         ) ??
-        this;
+        src;
   }
 }
