@@ -35,7 +35,7 @@ class LocaleRef extends ConfigRef<String, Type> {
     this.languageCode,
     this.countryCode,
   ) : super(
-          ref: '${languageCode.toLowerCase()}_${countryCode.toUpperCase()}',
+          ref: '${languageCode}_$countryCode'.toLowerCase(),
           type: LocaleRef,
         );
 
@@ -51,7 +51,7 @@ class LocaleRef extends ConfigRef<String, Type> {
       final countryCode = parts[1];
       return LocaleRef(languageCode, countryCode);
     }
-    return LocaleRef('en', 'US');
+    return LocaleRef('en', 'us');
   }
 
   //
