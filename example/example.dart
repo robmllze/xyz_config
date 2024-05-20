@@ -19,18 +19,16 @@ import 'package:xyz_config/_common.dart';
 // Step 1: Create a translations file somewhere and call it something like
 // `en_US.yaml`.
 
-/**
-```yaml
-greetings:
-  HelloWorld: Hello World!
-```
-*/
+// ```yaml
+// greetings:
+//   HelloWorld: Hello World!
+// ```
 
 void main() async {
   // Step 2 - Create a function that reads a file and returns its contents as a
   // string. In Flutter, you'd use the rootBundle.loadString or you can
   // even read remote files using the http package.
-  final fileReader = (filePath) => File(filePath).readAsString();
+  Future<String> fileReader(filePath) => File(filePath).readAsString();
 
   // Step 3 - Create a translations reader that reads YAML files from the
   // translations/ directory.
