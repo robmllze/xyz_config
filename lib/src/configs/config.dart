@@ -25,8 +25,11 @@ class Config<TConfigRef extends ConfigRef> extends Equatable {
   /// The reference to the config file.
   final TConfigRef? ref;
 
-  /// The fields of the config.
-  late final Map fields;
+  /// The parsed fields of the config.
+  late final Map parsedFields;
+
+  // The unparsed data of the config.
+  late final Map data;
 
   //
   //
@@ -42,7 +45,8 @@ class Config<TConfigRef extends ConfigRef> extends Equatable {
     this.ref,
     this.settings = const ReplacePatternsSettings(),
   }) {
-    this.fields = {};
+    this.parsedFields = {};
+    this.data = {};
   }
 
   //
@@ -50,12 +54,13 @@ class Config<TConfigRef extends ConfigRef> extends Equatable {
   //
 
   /// Sets the fields of the config from a JSON map.
-  void setFields(Map json) {
-    this.fields.clear();
-    final newFields = expandJson(
-      recursiveReplace(json, settings: this.settings),
-    );
-    this.fields.addAll(newFields);
+  void setFields(Map data) {
+    this.data
+      ..clear()
+      ..addAll(data);
+    this.parsedFields
+      ..clear()
+      ..addAll(expandJson(recursiveReplace(data, settings: this.settings)));
   }
 
   //
@@ -72,7 +77,7 @@ class Config<TConfigRef extends ConfigRef> extends Equatable {
     final settingsOverride = settings ?? this.settings;
     final expandedArgs = expandJson(args);
     var data = {
-      ...this.fields,
+      ...this.parsedFields,
       ...expandedArgs,
     };
     var input = _addOpeningAndClosing(
