@@ -24,9 +24,8 @@ environment:
 ## -----------------------------------------------------------------------------
 
 dependencies:
-  # xyz_utils: ">=0.60.0 <1.0.0"
-  xyz_utils:
-    path: ../xyz_utils
+  xyz_utils: ">=0.60.0 <1.0.0"
+
   yaml: ^3.1.2
   meta: ^1.11.0
   equatable: ^2.0.5
@@ -34,5 +33,13 @@ dependencies:
 
 ## -----------------------------------------------------------------------------
 
+dependency_overrides:
+  # TODO: Comment out these lines if you don't have these packages at their
+  # respective paths. They are included for development purposes to allow
+  # simultaneous work on this package and its dependencies.
+xyz_utils:
+  path: ../xyz_utils
+
+## -----------------------------------------------------------------------------
 dev_dependencies:
   lints: ^3.0.0
