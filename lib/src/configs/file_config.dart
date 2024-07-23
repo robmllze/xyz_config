@@ -67,16 +67,11 @@ class FileConfig extends Config<ConfigFileRef> {
     return true;
   }
 
-  /// Processes a YAML file.
-  Future<void> _readYamlFile() async {
+  /// Processes a JSON file.
+  Future<void> _readJsonFile() async {
     final src = await this.ref?.read?.call();
     if (src != null) {
-      dynamic data;
-      try {
-        data = loadYaml(src) as YamlMap;
-      } catch (_) {
-        data = {'error': 'Failed to load YAML file.'};
-      }
+      final data = jsonToData(src);
       this.setFields(data);
     }
   }
@@ -85,33 +80,16 @@ class FileConfig extends Config<ConfigFileRef> {
   Future<void> _readJsoncFile() async {
     var src = await this.ref?.read?.call();
     if (src != null) {
-      final result = parseSourceForStringsAndComments(src);
-      for (final c in result.multiLineComments) {
-        src = src!.replaceAll(c, '');
-      }
-      for (final c in result.singleLineComments) {
-        src = src!.replaceAll(c, '');
-      }
-      dynamic data;
-      try {
-        data = data = jsonDecode(src!);
-      } catch (_) {
-        data = {'error': 'Failed to load JSONC file.'};
-      }
+      final data = jsoncToData(src);
       this.setFields(data);
     }
   }
 
-  /// Processes a JSON file.
-  Future<void> _readJsonFile() async {
+  /// Processes a YAML file.
+  Future<void> _readYamlFile() async {
     final src = await this.ref?.read?.call();
     if (src != null) {
-      dynamic data;
-      try {
-        data = data = jsonDecode(src);
-      } catch (_) {
-        data = {'error': 'Failed to load JSON file.'};
-      }
+      final data = yamlToData(src);
       this.setFields(data);
     }
   }
@@ -120,24 +98,7 @@ class FileConfig extends Config<ConfigFileRef> {
   Future<void> _readCsvFile() async {
     final src = await this.ref?.read?.call();
     if (src != null) {
-      dynamic data;
-      try {
-        final csv = csvToMap(src);
-        data = csv.map((key, value) {
-          if (value.length == 2) {
-            return MapEntry(value[0], value[1]);
-          } else if (value.length > 2) {
-            return MapEntry(
-              value.sublist(0, value.length - 1).join(this.settings.separator),
-              value.last,
-            );
-          } else {
-            return const MapEntry(null, null);
-          }
-        }).nonNulls;
-      } catch (_) {
-        data = {'error': 'Failed to load CSV file.'};
-      }
+      final data = csvToData(src, this.settings);
       this.setFields(data);
     }
   }

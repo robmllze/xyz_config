@@ -50,7 +50,7 @@ void main() async {
   print('greetings.HelloWorld'.tr());
 
   // Case insensitive, prints 'Hello World!'
-  print('Hi there world!||message.HELLOWORLD'.tr());
+  print('Hi there world!||greetings.HELLOWORLD'.tr());
 
   // Key doesn't exist, prints 'Uhm, hola!'
   print('Uhm, hola!||greetings.doesntexist'.tr());

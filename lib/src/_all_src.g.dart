@@ -19,4 +19,5 @@ export 'refs/config_ref.dart';
 export 'refs/locale_ref.dart';
 export 'utils/config_file_type.dart';
 export 'utils/parse_source_for_strings_and_comments.dart';
+export 'utils/src_to_data.dart';
 export 'utils/translation_file_reader.dart';
