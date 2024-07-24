@@ -6,23 +6,62 @@ This package allows you to add configurations and language support to your apps.
 
 ## Quickstart
 
-1. Create a translations file at `your_flutter_project/assets/translations/en_us.yaml`.
+1. Create translation files at `YOUR_PROJECT/assets/translations/`.
+
 ```yaml
-greetings:
-  HelloWorld: Hello World!
+# en_us.yaml
+messages:
+  welcome_message: Welcome to this app!
+languages:
+  en_us: English
+  af_za: Afrikaans
 ```
 
-2. Access the translations in your app:
+```yaml
+# af_za.yaml
+messages:
+  welcome_message: Welkom by hierdie app!
+languages:
+  en_us: Engels
+  af_za: Afrikaans
+```
+
+2. Create the translation file reader.
+
 ```dart
   final translationFileReader = TranslationFileReader(
+    // The path to the translations directory, e.g. rootBundle looks at 'assets/translations'.
     translationsDirPath: ['translations'],
+    // The translation file type, e.g. YAML, JSON, JSONC, CSV, etc.
     fileType: ConfigFileType.YAML,
+    // The translation file reader, e.g. rootBundle, http, file, etc.
     fileReader: (filePath) => rootBundle.loadString(filePath),
   );
+```
 
-  await translationFileReader.read('en_us'.toLowerCase());
+3. Change the language and use the translations.
 
-  print('greetings.HelloWorld'.tr());
+```dart
+  Button(
+    onTap: () async {
+      // Translate app to English (en_us.yaml).
+      await translationFileReader.read('en_us');
+      // Refresh the UI. You will have to refresh the app at the top level so that all widgets can update.
+      setState(() {});
+    },
+    child: Text('English||languages.en_us'.tr()),
+  )
+
+  Button(
+    onTap: () async {
+      // Translate app to Afrikaans (af_za.yaml).
+      await translationFileReader.read('af_za');
+      setState(() {});
+    },
+    child: Text('Afrikaans||languages.af_za'.tr()),
+  )
+
+  Text('Hmmm... welcome!||messages.welcome_message'.tr()); // Defaults to "Hmmm... welcome!" if the translation at "messages.welcome_message" isn't found.
 ```
 
 **Tip:** File names are case sensitive on most Linux based systems like Firebase Hosting. Make sure to use the correct case for your file paths. As a rule of thumb, always use lowercase file paths.
@@ -33,27 +72,24 @@ greetings:
 
 ## Installation
 
-#### Add this to your `pubspec.yaml` file:
+Use this package as a dependency by adding it to your `pubspec.yaml` file (see [here](https://pub.dev/packages/xyz_config/install)), or copy the needed source code directly into your project.
 
-```yaml
-dependencies:
-  xyz_config: any # or the latest version
-```
-## Contributing
+## Contributing and Discussions
 
-Contributions are welcome. Here are a few ways you can help:
+This is an open-source project, and contributions are welcome from everyone, regardless of experience level. Contributing to projects is a great way to learn, share knowledge, and showcase your skills to the community. Join the discussions to ask questions, report bugs, suggest features, share ideas, or find out how you can contribute.
 
-- Report bugs and make feature requests.
-- Add new features.
-- Improve the existing code.
-- Help with documentation and tutorials.
+### Join GitHub Discussion:
+
+💬 https://github.com/robmllze/xyz_config/discussions/1
+
+### Join Reddit Discussion:
+
+💬 https://www.reddit.com/user/robmllze/m/xyz_config_package/
+
+### Chief Maintainer:
+
+📧 Email _Robert Mollentze_ at robmllze@gmail.com
 
 ## License
 
 This project is released under the MIT License. See [LICENSE](https://raw.githubusercontent.com/robmllze/xyz_config/main/LICENSE) for more information.
-
-## Contact
-
-**Author:** Robert Mollentze
-
-**Email:** robmllze@gmail.com

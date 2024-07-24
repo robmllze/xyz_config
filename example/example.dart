@@ -40,7 +40,7 @@ void main() async {
 
   // Step 4 - Read the en_US translation and set it as the active translation.
   // In Flutter, you'd want to rebuild your widget tree after setting this.
-  await translationFileReader.read('en_US');
+  await translationFileReader.read('en_us');
 
   // Step 5 - Use the tr() extension method to translate strings.
   // The text after the || is what will be printed if the translation is missing.
