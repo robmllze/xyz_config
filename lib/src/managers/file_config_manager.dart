@@ -27,7 +27,8 @@ class FileConfigManager extends ConfigManager {
   //
 
   Future<void> setFileConfig(FileConfig fileConfig) async {
-    final added = this.configs.firstWhereOrNull((e) => e.ref == fileConfig.ref) != null;
+    final added =
+        this.configs.firstWhereOrNull((e) => e.ref == fileConfig.ref) != null;
     if (!added) {
       this.configs.add(fileConfig);
       await fileConfig.readAssociatedFile();

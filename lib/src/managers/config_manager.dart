@@ -35,7 +35,8 @@ class ConfigManager<TConfig extends Config> {
   //
 
   void setConfig(TConfig config) async {
-    final added = this.configs.firstWhereOrNull((e) => e.ref == config.ref) != null;
+    final added =
+        this.configs.firstWhereOrNull((e) => e.ref == config.ref) != null;
     if (!added) {
       this.configs.add(config);
     }
