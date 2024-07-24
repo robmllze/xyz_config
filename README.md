@@ -80,7 +80,7 @@ This is an open-source project, and contributions are welcome from everyone, reg
 
 ### Join GitHub Discussion:
 
-💬 https://github.com/robmllze/xyz_config/discussions/1
+💬 https://github.com/robmllze/xyz_config/discussions
 
 ### Join Reddit Discussion:
 
