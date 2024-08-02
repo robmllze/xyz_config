@@ -15,6 +15,7 @@ export 'dart:convert';
 export 'package:meta/meta.dart';
 
 export 'package:yaml/yaml.dart';
-export 'package:xyz_utils/xyz_utils.dart';
+export 'package:df_collection/df_collection.dart';
+export 'package:df_type/df_type.dart';
 
 export 'src/_all_src.g.dart';
