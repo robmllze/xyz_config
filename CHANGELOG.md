@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.31.0]
+
+- Released @ 2024-08-02 10:19:12.739655Z
+- refactor: Removed xyz_utils dependency.
+
 ## [0.30.2]
 
 - Released @ 2024-07-24 07:12:02.798700Z
